@@ -6,17 +6,21 @@
 
 // create the struct to hold job information
 typedef struct Job {
+	int pid;
 	int arrival_time;
 	int service_time;
 	int priority;
+	int remaining_service_time;
+	int start_job_time;
+	int finish_job_time;
+	
+	
 } Job;
 
 // print the order of the jobs
-void print_job_order(struct Job* jobs, int size) {
-	for(int i = 0; i < size; i++) {
-		printf("Job Number: %i\n", i);
-		printf("Arrival Time: %i\nService Time:%i\nPriority: %i\n\n", jobs[i].arrival_time, jobs[i].service_time, jobs[i].priority);
-	}
+void print_job(struct Job job) {
+	printf("Job Number: %i\n", job.pid);
+	printf("Arrival Time: %i\t\tService Time:%i\t\tPriority: %i\n", job.arrival_time, job.service_time, job.priority);
 }
 
 // swap position of the jobs in the array

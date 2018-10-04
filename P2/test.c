@@ -12,14 +12,11 @@ int main() {
 	srand(seed);
 	struct Job* jobs = malloc(sizeof(Job) * 10) ;
 	for(int i = 0; i < 10; i++) {
-		jobs[i].pid = i;
-		jobs[i].arrival_time = rand() % 100;
-		jobs[i].service_time = rand() % 11;
-		jobs[i].priority = rand() % 5;
+		jobInitialization(&jobs[i], i);
 	}
 	
 	// sort the jobs based on arrival times
-	job_sort(jobs, 10, 0);
+	//job_sort(jobs, 10, 0);
 	printf("Sorted by arrival time:\n");
 	
 	struct Queue q_job;
@@ -29,12 +26,18 @@ int main() {
 	for(int i = 0; i < 10; i++) {
 		push(&q_job, jobs[i]);
 	}
-	
-	printf("\nPrint first element of queue\n");
-	print_job(front(&q_job));
-	
-	printf("\nPrinting queue:\n");
+		
+	printf("\nPrinting based on priority sorted queue:\n");
+	prioritySort(&q_job);
 	print_queue(&q_job);
 	
+	printf("\nPrinting based on service time sorted queue:\n");
+	serviceSort(&q_job);
+	print_queue(&q_job);
+	
+	
+	printf("\nPrinting based on shortest remaining time sorted queue:\n");
+	serviceSort(&q_job);
+	print_queue(&q_job);
 
 }

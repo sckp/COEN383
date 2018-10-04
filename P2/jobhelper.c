@@ -75,7 +75,7 @@ void job_sort(struct Job* job, int size, int sort_param) {
 	else if(2 == sort_param) {
 		for(int i = 0; i < size; i++) {
 			for(int j = i + 1; j < size; j++) {
-				if(job[i].priority < job[j].priority) {
+				if(job[i].priority > job[j].priority) {
 					change_position(job, i, j);
 				}
 			}

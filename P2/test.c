@@ -27,17 +27,11 @@ int main() {
 		push(&q_job, jobs[i]);
 	}
 		
-	printf("\nPrinting based on priority sorted queue:\n");
-	prioritySort(&q_job);
-	print_queue(&q_job);
-	
-	printf("\nPrinting based on service time sorted queue:\n");
-	serviceSort(&q_job);
-	print_queue(&q_job);
-	
-	
-	printf("\nPrinting based on shortest remaining time sorted queue:\n");
-	serviceSort(&q_job);
-	print_queue(&q_job);
+	printf("Printing elements of queue and size after popping each off.\n");
+	while(!isEmpty(&q_job)) {
+		print_job(q_job.head->job);
+		pop(&q_job);
+		printf("remaining queue size: %i\n", q_job.size);
+	}
 
 }

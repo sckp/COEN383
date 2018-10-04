@@ -49,6 +49,10 @@ struct Job front(struct Queue *q) {
 // adjusts the pointers within the queue, decrements the size,
 // and frees the memory
 void pop(struct Queue *q) {
+	// if size is 0, queue is empty return
+	if(isEmpty(q)) {
+		return;
+	}
 	// decrement the size
 	q->size--;
 	//move the second node to the first position
@@ -56,6 +60,12 @@ void pop(struct Queue *q) {
 	q->head = q->head->next;	
 	// free the memory
 	free(temp);
+	// check if that was the last element in the queue
+	if(0 == q->size) {
+		// queue is empty, set pointers to null
+		q->head = NULL;
+		q->tail = NULL;
+	}
 }
 
 // create a function that adds an element to the queue

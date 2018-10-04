@@ -19,14 +19,14 @@ struct Node {
 // the nodes with the job data
 struct Queue {
 	struct Node *first;
-	struct Node *last;
+	struct Node *end;
 	int size;
 };
 
 // create an initializer for the queue
 void initialize(struct Queue *q) {
 	q->first = NULL;
-	q->last = NULL;
+	q->end = NULL;
 	q->size = 0;
 }
 
@@ -62,7 +62,6 @@ void pop(struct Queue *q) {
 void push(struct Queue *q, Job job) {
 	// increment the size
 	q->size++;
-	
 	// check if this is the first element being added to the queue
 	if(NULL == q->first) {
 		// place the new node as the first element
@@ -72,18 +71,18 @@ void push(struct Queue *q, Job job) {
 		// set the next element to null
 		q->first->next = NULL;
 		// set the last element pointing to itself
-		q->last = q->first;
+		q->end = q->first;
 	}
 	// else it isn't the first element
 	else {
 		// place the new node at the end of the queue
-		q->last->next = (struct Node*)malloc(sizeof(struct Node));
+		q->end->next = (struct Node*)malloc(sizeof(struct Node));
 		// set the job
-		q->last->next->job = job;
+		q->end->next->job = job;
 		// set the end pointer to null
-		q->last->next->next = NULL;
+		q->end->next->next = NULL;
 		// set the last pointer
-		q->last = q->last->next;
+		q->end = q->end->next;
 	}
 }
 

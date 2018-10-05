@@ -1,21 +1,21 @@
 //P2 HPF non-preemptive
 
-#include "job_helper.h"
+#include "jobhelper.h"
 
-#DEFINE QUANTA 100
-#DEFINE NUM_JOBS 10
-#DEFINE ARRIVAL 0
-#DEFINE PRIORITY 2
+#define QUANTA 100
+#define NUM_JOBS 10
+#define ARRIVAL 0
+#define PRIORITY 2
 
-int HPF(Jobs *job) {
+int HPF(Job *job) {
 	//SORT JOBS BY ARRIVAL TIME
 	job_sort(job, NUM_JOBS, ARRIVAL);
 
 	//FOUR PRIORITY QUEUES OF JOBS
-	Jobs priority_queue[4][NUM_JOBS]; 
+	Job priority_queue[4][NUM_JOBS]; 
 	
 	//TEMP TO GRAB RUNNING JOB
-	Jobs *current_job = NULL;
+	Job *current_job = NULL;
 	int current_queue = -1;
 	int current_queue_index = 0;
 	
@@ -40,7 +40,7 @@ int HPF(Jobs *job) {
 			while (index < NUM_JOBS && job[index].arrival_time <= i) { 
 				int new_jprior = job[index].priority - 1;
 				//INSERTING JOB TO CORRECT PRIORITY QUEUE
-				priority_queue[new_jprior][priority_index[new_jprior]] = jobs[index];
+				priority_queue[new_jprior][priority_index[new_jprior]] = job[index];
 				//UPDATING INDEX/NUMBER OF JOBS IN EACH PRIORITY QUEUE
 				priority_index[new_jprior]++;
 				//UPDATING INDEX OF WAITING JOBS 
@@ -53,7 +53,7 @@ int HPF(Jobs *job) {
 		//CHECK IF A JOB IS RUNNING
 		if (current_job == NULL) {
 			//CHECK IF IN TIME LIMIT TO START NEW JOB
-			if (q >= QUANTA) {
+			if (i >= QUANTA) {
 				break;
 			}
 			//FIND NEXT JOB TO RUN IN PRIORITY QUEUES
@@ -64,7 +64,7 @@ int HPF(Jobs *job) {
 				}
 			}
 
-			while (current_queue_index < priority_index[current_queue] && priority_queue[current_queue_index].service_time <= 0) {
+			while (current_queue_index < priority_index[current_queue] && priority_queue[current_queue][current_queue_index].service_time <= 0) {
 				current_queue_index ++;
 			}
 			current_job = &(priority_queue[current_queue][current_queue_index]);
@@ -80,8 +80,8 @@ int HPF(Jobs *job) {
 		current_job->service_time -= 1;
 
 		//NARK PROCESS AS FINISHED AND CLEAR CURRENT JOB
-		if current_job->service_time <= 0 {
-			done_queue[target_process->pid] = 1; 
+		if (current_job->service_time <= 0) {
+			done_queue[current_job->pid] = 1; 
 			current_job = NULL; 
 		}	
 	}

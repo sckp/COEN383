@@ -5,34 +5,34 @@
 #include "jobhelper.h"
 #include "queue.h"
 
+// header for round robin scheduler
+#include "roundrobin.h"
+
 
 int main() {
 	int seed = time(NULL);
 	// comment out srand to fix randomization
-	srand(seed);
-	struct Job* jobs = malloc(sizeof(Job) * 10) ;
-	for(int i = 0; i < 10; i++) {
+	//srand(seed);
+	
+	const int number_of_jobs = 3;
+	
+	struct Job* jobs = malloc(sizeof(Job) * number_of_jobs);
+	for(int i = 0; i < number_of_jobs; i++) {
 		jobInitialization(&jobs[i], i);
 	}
 	
-	// sort the jobs based on arrival times
-	//job_sort(jobs, 10, 0);
-	printf("Sorted by arrival time:\n");
+	print_job(jobs[0]);
+	print_job(jobs[1]);
+	print_job(jobs[2]);
+	//print_job(jobs[3]);
+	//print_job(jobs[4]);
+	printf("\n\n");
 	
-	struct Queue q_job;
-	initialize(&q_job);
+	// Round Robin Scheduling
+	// Create array for results of round robin
+	struct Job* RR_jobs = malloc(sizeof(Job) * number_of_jobs);
 	
-	// add jobs to the queue
-	for(int i = 0; i < 10; i++) {
-		push(&q_job, jobs[i]);
-	}
-		
-	printf("Printing elements of queue and size after popping each off.\n");
-	while(!isEmpty(&q_job)) {
-		print_job(q_job.head->job);
-		pop(&q_job);
-		printf("remaining queue size: %i\n", q_job.size);
-	}
+	jobs_Round_Robin(jobs, RR_jobs, number_of_jobs);
 
 }
 

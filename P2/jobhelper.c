@@ -1,14 +1,14 @@
 #include "jobhelper.h"
 
 // initialize the job struct
-void jobInitialization(struct Job *j, int i) {
+void jobInitialization(struct Job* j, int i) {
 	j->pid = i;
 	j->arrival_time = rand() % 100;
 	j->service_time = rand() % 11;
 	j->priority = rand() % 5;
 	j->remaining_service_time = j->service_time;
-	j->start_time = j->arrival_time;
-	j->finish_time = j->arrival_time;	
+	j->start_time = -1;
+	j->finish_time = -1;	
 }
 
 // print the order of the jobs
@@ -48,10 +48,14 @@ void change_position(struct Job* job, int i, int j) {
 }
 
 // function to sort the job based on the desired parameter passed
-// sort_param: 0 - arrival time, 1 - service time, 2 - priority
-// sort_param: 3 - remaining service time
+// sort_parameters
+// 0 - arrival time
+// 1 - service time
+// 2 - priority
+// 3 - remaining service time
+// 4 - finish time
 void job_sort(struct Job* job, int size, int sort_param) {
-	// check if we want to sort by arrival time
+	// sort by arrival time
 	if(0 == sort_param) {
 		for(int i = 0; i < size; i++) {
 			for(int j = i + 1; j < size; j++) {
@@ -61,7 +65,7 @@ void job_sort(struct Job* job, int size, int sort_param) {
 			}
 		}
 	}
-	// check if we want to sort by service time
+	// sort by service time
 	else if(1 == sort_param) {
 		for(int i = 0; i < size; i++) {
 			for(int j = i + 1; j < size; j++) {
@@ -71,7 +75,7 @@ void job_sort(struct Job* job, int size, int sort_param) {
 			}
 		}
 	}
-	// check if we want to sort by priority level
+	// sort by priority level
 	else if(2 == sort_param) {
 		for(int i = 0; i < size; i++) {
 			for(int j = i + 1; j < size; j++) {
@@ -81,10 +85,21 @@ void job_sort(struct Job* job, int size, int sort_param) {
 			}
 		}
 	}
+	// sort by remaining service time
 	else if(3 == sort_param) {
 		for(int i = 0; i < size; i++) {
 			for(int j = i+1; j < size; j++) {
 				if(job[i].remaining_service_time > job[j].remaining_service_time) {
+					change_position(job, i, j);
+				}
+			}
+		}
+	}
+	// sort by finish time
+	else if(4 == sort_param) {
+		for(int i = 0; i < size; i++) {
+			for(int j = i+1; j < size; j++) {
+				if(job[i].finish_time > job[j].finish_time) {
 					change_position(job, i, j);
 				}
 			}

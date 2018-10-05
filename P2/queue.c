@@ -1,31 +1,38 @@
+#include <stdbool.h>
+
 #include "queue.h"
 
 // create an initializer for the queue
-void initialize(struct Queue *q) {
+void initialize(struct Queue* q) {
 	q->head = NULL;
 	q->tail = NULL;
 	q->size = 0;
 }
 
 // check if the queue is empty
-bool isEmpty(struct Queue *q) {
+bool isEmpty(struct Queue* q) {
 	return (1 > q->size);
 }
 
 // get the queue size
-int queue_size(struct Queue *q) {
-	return q->size;
+int queue_size(struct Queue* q) {
+	if(NULL == q->head) {
+		return 0;
+	}
+	else {
+		return q->size;
+	}
 }
 
 // create a function to get the front element from the queue
-struct Job front(struct Queue *q) {
+struct Job front(struct Queue* q) {
 	return q->head->job;
 }
 
 // create a function that pops an element from the queue,
 // adjusts the pointers within the queue, decrements the size,
 // and frees the memory
-void pop(struct Queue *q) {
+void pop(struct Queue* q) {
 	// if size is 0, queue is empty return
 	if(isEmpty(q)) {
 		return;
@@ -33,7 +40,7 @@ void pop(struct Queue *q) {
 	// decrement the size
 	q->size--;
 	//move the second node to the first position
-	struct Node *temp = q->head;
+	struct Node* temp = q->head;
 	q->head = q->head->next;	
 	// free the memory
 	free(temp);
@@ -46,7 +53,7 @@ void pop(struct Queue *q) {
 }
 
 // create a function that adds an element to the queue
-void push(struct Queue *q, Job job) {
+void push(struct Queue* q, Job job) {
 	// increment the size
 	q->size++;
 	// check if this is the first element being added to the queue
@@ -74,12 +81,12 @@ void push(struct Queue *q, Job job) {
 }
 
 // print each element in the queue
-void print_queue(struct Queue *q) {
+void print_queue(struct Queue* q) {
 	if(isEmpty(q)) {
 		printf("Queue is empty.\n");
 	}
 	else {
-		struct Node *n = q->head;
+		struct Node* n = q->head;
 		// loop through all nodes until NULL is reached
 		while(NULL != n) {
 			print_job(n->job);
@@ -89,17 +96,17 @@ void print_queue(struct Queue *q) {
 }
 
 // empty the queue
-void make_empty(struct Queue *q) {
+void make_empty(struct Queue* q) {
 	// iterate through the queue freeing memory
 	while(NULL != q->head) {
-		struct Node *temp = q->head;
+		struct Node* temp = q->head;
 		q->head = q->head->next;
 		free(temp);
 	}
 }
 
 // sort queue based on priority
-void prioritySort(struct Queue *q) {
+void prioritySort(struct Queue* q) {
 	// check if the queue is empty
 	if(isEmpty(q)) {
 		return;
@@ -132,7 +139,7 @@ void prioritySort(struct Queue *q) {
 }
 
 // sort queue based on service time
-void serviceSort(struct Queue *q) {
+void serviceSort(struct Queue* q) {
 	// check if the queue is empty
 	if(isEmpty(q)) {
 		return;
@@ -165,7 +172,7 @@ void serviceSort(struct Queue *q) {
 }
 
 // sort queue based on service time
-void remainingServiceSort(struct Queue *q) {
+void remainingServiceSort(struct Queue* q) {
 	// check if the queue is empty
 	if(isEmpty(q)) {
 		return;

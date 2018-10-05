@@ -1,5 +1,5 @@
-#ifndef JOB_HELPER
-#define JOB_HELPER
+#ifndef JOBHELPER_H
+#define JOBHELPER_H
 
 #include <time.h>
 #include <stdio.h>
@@ -17,7 +17,7 @@ typedef struct Job {
 } Job;
 
 // initialize the job struct
-void jobInitialization(struct Job *j, int i);
+void jobInitialization(struct Job* j, int i);
 
 // print the order of the jobs
 void print_job(struct Job job);
@@ -26,8 +26,11 @@ void print_job(struct Job job);
 void change_position(struct Job* job, int i, int j);
 
 // function to sort the job based on the desired parameter passed
-// sort_param: 0 - arrival time, 1 - service time, 2 - priority
-// sort_param: 3 - remaining service time
+// sort parameters:
+// 0 - arrival time
+// 1 - service time
+// 2 - priority
+// 3 - remaining service time
 void job_sort(struct Job* job, int size, int sort_param);
 
 // function to get the response time

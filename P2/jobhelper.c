@@ -5,7 +5,15 @@ void jobInitialization(struct Job* j, int i) {
 	j->pid = i;
 	j->arrival_time = rand() % 100;
 	j->service_time = rand() % 11;
+	// check if 0 was the service time
+	if(0 == j->service_time) {
+		j->service_time = 1;
+	}
 	j->priority = rand() % 5;
+	// check if the priority is 0
+	if(0 == j->priority) {
+		j->priority = 1;
+	}
 	j->remaining_service_time = j->service_time;
 	j->start_time = -1;
 	j->finish_time = -1;	

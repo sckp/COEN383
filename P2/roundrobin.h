@@ -23,5 +23,8 @@ void moveToCPU(CPU* c, Queue* q);
 // the job queue or the completed jobs array
 void removeFromCPU(CPU* c, Queue* q, Job* complete);
 
+// this function removes jobs from the queue that haven't start
+// when the CPU has passed 100
+void removeJobFromQueue(Queue* q, Job* complete);
 
 #endif

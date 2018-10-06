@@ -4,6 +4,7 @@
 #include <time.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 // create the struct to hold job information
 typedef struct Job {
@@ -15,6 +16,12 @@ typedef struct Job {
 	int start_time;
 	int finish_time;
 } Job;
+
+// create a struct to represent the CPU
+typedef struct CPU {
+	bool available;
+	Job* job;
+} CPU;
 
 // initialize the job struct
 void jobInitialization(struct Job* j, int i);

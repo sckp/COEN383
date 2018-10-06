@@ -3,7 +3,7 @@ CC = gcc
 #set the flags
 CFLAGS = -Wall
 #set the object files
-OBJFILES = main.o queue.o jobhelper.o roundrobin.o
+OBJFILES = main.o queue.o jobhelper.o roundrobin.o preHPF.o
 # specify the name of the desired output file
 TARGET = scheduler
 

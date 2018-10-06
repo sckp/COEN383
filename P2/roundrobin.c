@@ -24,22 +24,11 @@ void jobs_Round_Robin(Job* jobs, Job* finished_jobs, int numJobs) {
 	CPU cpu;
 	// Initialization of the CPU
 	cpu.available = true;
-	
-	Job* test = malloc(sizeof(Job) * 5);
-	for(int i = 0; i < 5; i++) {
-		test[i].pid = i;
-		test[i].arrival_time = i;
-		test[i].service_time = i+1;
-		test[i].remaining_service_time = test[i].service_time;
-		test[i].start_time = -1;
-		test[i].finish_time = -1;
-		
-	}
-	
-	
+
 	// sort the jobs based on arrival time
 	job_sort(jobs, numJobs, 0);
 	
+	/*
 	printf("Jobs to process:\n");
 	// print jobs based on finish time
 	for(int i = 0; i < numJobs; i++) {
@@ -48,15 +37,15 @@ void jobs_Round_Robin(Job* jobs, Job* finished_jobs, int numJobs) {
 			jobs[i].start_time, jobs[i].finish_time);
 	}
 	printf("\n\n");
+	*/
 	
 	// being processing the jobs
 	processJobs(&cpu, &job_queue, jobs, finished_jobs, numJobs);
-	
-	
+	// sort the completed jobs by their arrival time
 	job_sort(finished_jobs, numJobs, 0);
-	//job_sort(finished_jobs, 5, 0);
 	
-	printf("Finished Jobs:\n");
+	
+	printf("Finished Jobs RR:\n");
 	// print jobs based on finish time
 	for(int i = 0; i < numJobs; i++) {
 		printf("ID: %i\tarrival time: %i   service time: %i\tstart time: %i\tfinish time: %i\n",
@@ -103,7 +92,7 @@ void processJobs(CPU* cpu, Queue* jobQueue, Job* jobs, Job* completed, int numJo
 			removeFromCPU(cpu, jobQueue, completed);
 		}
 		// increment the global clock
-		cpu_clock ++;
+		cpu_clock++;
 	}
 	// free the memory in the CPU struct
 	free(cpu->job);

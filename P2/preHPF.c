@@ -14,10 +14,30 @@ const int quanta_HPF = 1;
 int jobIndex_HPF = 0;
 int finishedIndex_HPF = 0;
 
+// struct to hold all of the cpu usuage results
+struct cpu_Use {
+	int pid;
+	int start;
+	int end;
+};
+
+struct cpu_Use* results;
+int result_index;
+
 // function to receive the generated job array from main program
 void jobs_Pre_HPF(Job* jobs, Job* finished_jobs, int numJobs) {
 	// initialize the 4 job queues
 	Queue* jobQueues = malloc(sizeof(Queue) * 4);
+	
+	// create an array for all cpu usage results
+	results = malloc(sizeof(struct cpu_Use) * 256);
+	// initialize all results
+	for(int i = 0; i < 256; i++) {
+		results[i].pid = -1;
+		results[i].start = -1;
+		results[i].end = -1;
+	}
+	result_index = 0;
 	
 	// initialize the 4 job queues
 	for(int i = 0; i < 4; i++) {
@@ -43,6 +63,13 @@ void jobs_Pre_HPF(Job* jobs, Job* finished_jobs, int numJobs) {
 			finished_jobs[i].start_time, finished_jobs[i].finish_time);
 	}
 	
+	printf("\n\n\n");
+	for(int i = 0; i < 256; i++) {
+		if(-1 != results[i].pid) {
+			printf("Job ID: %i\tStart: %i\tEnd: %i\n", results[i].pid, results[i].start, results[i].end);
+		}
+	}
+	free(results);
 }
 
 // begin process of the jobs
@@ -145,6 +172,14 @@ void moveToCPU_HPF(CPU* c, Queue* q) {
 // this function removes a job from the CPU and puts it in either
 // the job queue or the completed jobs array
 void removeFromCPU_HPF(CPU* c, Queue* q, Job* complete, int queueIndex) {
+	if(256 > result_index) {
+		// set the entry for cpu usage results
+		results[result_index].pid = c->job->pid;
+		results[result_index].start = cpu_clock_HPF - 1;
+		results[result_index].end = cpu_clock_HPF;
+		result_index++;
+	}
+	
 	// increment the ages for all waiting processes
 	ageProcesses(q);
 	// decrement the remaining service time for the job
@@ -279,6 +314,7 @@ void ageProcesses(Queue* q) {
 		}
 		// put the job into its proper queue
 		push(&q[(j[i].priority - 1)], j[i]);
-		printf("putting job: %i in queue: %i\n", j[i].pid, j[i].priority-1);
-	}	
+	}
+	// free the memory used to hold the jobs
+	free(j);
 }

@@ -16,7 +16,8 @@ void jobInitialization(struct Job* j, int i) {
 	}
 	j->remaining_service_time = j->service_time;
 	j->start_time = -1;
-	j->finish_time = -1;	
+	j->finish_time = -1;
+	j->age = 0;
 }
 
 // print the order of the jobs

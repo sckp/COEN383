@@ -15,6 +15,7 @@ typedef struct Job {
 	int remaining_service_time;
 	int start_time;
 	int finish_time;
+	int age;
 } Job;
 
 // create a struct to represent the CPU
@@ -33,11 +34,12 @@ void print_job(struct Job job);
 void change_position(struct Job* job, int i, int j);
 
 // function to sort the job based on the desired parameter passed
-// sort parameters:
+// sort_parameters
 // 0 - arrival time
 // 1 - service time
 // 2 - priority
 // 3 - remaining service time
+// 4 - finish time
 void job_sort(struct Job* job, int size, int sort_param);
 
 // function to get the response time

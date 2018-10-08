@@ -29,10 +29,11 @@ void jobs_Pre_HPF(Job* jobs, Job* finished_jobs, int numJobs) {
 	cpu.available = true;
 	// sort the jobs based on arrival time
 	job_sort(jobs, numJobs, 0);
+	
 	// being processing the jobs
 	processJobs_HPF(&cpu, jobQueues, jobs, finished_jobs, numJobs);
 	// sort the completed jobs by their arrival time
-	job_sort(finished_jobs, numJobs, 2);
+	job_sort(finished_jobs, numJobs, 4);
 	
 	printf("\nFinished Jobs Pre HPF:\n");
 	// print jobs based on finish time
@@ -133,6 +134,8 @@ void moveToCPU_HPF(CPU* c, Queue* q) {
 		c->job->start_time = q->head->job.start_time;
 	}
 	c->job->finish_time = q->head->job.finish_time;
+	// set the age of the process and return it to zero when it gets the CPU
+	c->job->age = 0;
 	// remove the job from the queue
 	pop(q);
 	// set the cpu to being available
@@ -142,6 +145,8 @@ void moveToCPU_HPF(CPU* c, Queue* q) {
 // this function removes a job from the CPU and puts it in either
 // the job queue or the completed jobs array
 void removeFromCPU_HPF(CPU* c, Queue* q, Job* complete, int queueIndex) {
+	// increment the ages for all waiting processes
+	ageProcesses(q);
 	// decrement the remaining service time for the job
 	c->job->remaining_service_time -= quanta_HPF;
 	// check if the job needs to go back into the queue or if it goes in the completed jobs list
@@ -238,3 +243,42 @@ void removeJobFromQueue_HPF(Queue* q, Job* complete) {
 	}
 }
 
+// this function will increment the ages of all the waiting processes
+// all queues with processes will have their age incremented with the
+// exception of the highest priority queue
+void ageProcesses(Queue* q) {
+	// create an array to hold all waiting jobs
+	int jobSize = queue_size(&q[1]) + queue_size(&q[2]) + queue_size(&q[3]);
+	// if there are no waiting jobs return from the function
+	if(1 > jobSize) {
+		return;
+	}
+	// create an array to hold all of the jobs
+	Job* j = malloc(sizeof(Job) * jobSize);
+	int index = 0;
+	// iterate through all 3 job queues
+	for(int i = 1; i < 4; i++) {
+		while(!isEmpty(&q[i])) {
+			j[index] = front(&q[i]);
+			// increment the age
+			j[index].age++;
+			// increment the index
+			index++;
+			pop(&q[i]);
+		}
+	}
+	// place all the jobs back into their respective queue in proper order
+	// while checking the age for if they need to be upgraded in their priority
+	for(int i = 0; i < jobSize; i++) {
+		// check the age of the job
+		if(6 > j[i].age) {
+			// increase priority
+			j[i].priority--;
+			// reset the age
+			j[i].age = 0;
+		}
+		// put the job into its proper queue
+		push(&q[(j[i].priority - 1)], j[i]);
+		printf("putting job: %i in queue: %i\n", j[i].pid, j[i].priority-1);
+	}	
+}

@@ -20,6 +20,7 @@ void jobs_Round_Robin(Job* jobs, Job* finished_jobs, int numJobs) {
 	Queue job_queue;
 	// initialize the job queue
 	initialize(&job_queue);
+	
 	// create a CPU instance
 	CPU cpu;
 	// Initialization of the CPU
@@ -53,6 +54,7 @@ void jobs_Round_Robin(Job* jobs, Job* finished_jobs, int numJobs) {
 			finished_jobs[i].start_time, finished_jobs[i].finish_time);
 	}
 	
+		
 }
 
 // begin process of the jobs

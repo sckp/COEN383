@@ -27,7 +27,11 @@ int result_index;
 // function to receive the generated job array from main program
 void jobs_Pre_HPF(Job* jobs, Job* finished_jobs, int numJobs) {
 	// initialize the 4 job queues
-	Queue* jobQueues = malloc(sizeof(Queue) * 4);
+	Queue* jobQueues = malloc(sizeof(Queue) * 4); 
+		// initialize the 4 job queues
+	for(int i = 0; i < 4; i++) {
+		initialize(&jobQueues[i]);
+	}
 	
 	// create an array for all cpu usage results
 	results = malloc(sizeof(struct cpu_Use) * 256);
@@ -39,10 +43,6 @@ void jobs_Pre_HPF(Job* jobs, Job* finished_jobs, int numJobs) {
 	}
 	result_index = 0;
 	
-	// initialize the 4 job queues
-	for(int i = 0; i < 4; i++) {
-		initialize(&jobQueues[i]);
-	}
 	// create a CPU instance
 	CPU cpu;
 	// Initialization of the CPU
@@ -62,12 +62,22 @@ void jobs_Pre_HPF(Job* jobs, Job* finished_jobs, int numJobs) {
 			finished_jobs[i].pid, finished_jobs[i].arrival_time, finished_jobs[i].service_time,
 			finished_jobs[i].start_time, finished_jobs[i].finish_time);
 	}
-	// free the memory that was used to hold the results
-	free(results);
+	
+	printf("\n\nCPU Time Table:\n");
+	for(int i = 0; i < 256; i++) {
+		if(-1 != results[i].pid) {
+			//printf("Job ID: %i\tStart: %i\tEnd: %i\n", results[i].pid, results[i].start, results[i].end);
+			printf("%i ", results[i].pid);
+		}
+	}
+	printf("\n\n");
 	
 	printf("\nThe average response time is: %f\n", avg_response_time(finished_jobs, numJobs));
 	printf("The average turnaround time is: %f\n", avg_turnaround_time(finished_jobs, numJobs));
 	printf("The average wait time is: %f\n", avg_wait_time(finished_jobs, numJobs));
+	
+	// free the memory that was used to hold the results
+	free(results);
 }
 
 // begin process of the jobs
@@ -174,6 +184,7 @@ void moveToCPU_HPF(CPU* c, Queue* q) {
 // this function removes a job from the CPU and puts it in either
 // the job queue or the completed jobs array
 void removeFromCPU_HPF(CPU* c, Queue* q, Job* complete, int queueIndex) {
+	// set the job into the cpu time table
 	if(256 > result_index) {
 		// set the entry for cpu usage results
 		results[result_index].pid = c->job->pid;

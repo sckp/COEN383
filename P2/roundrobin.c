@@ -54,7 +54,9 @@ void jobs_Round_Robin(Job* jobs, Job* finished_jobs, int numJobs) {
 			finished_jobs[i].start_time, finished_jobs[i].finish_time);
 	}
 	
-		
+	printf("\nThe average response time is: %f\n", avg_response_time(finished_jobs, numJobs));
+	printf("The average turnaround time is: %f\n", avg_turnaround_time(finished_jobs, numJobs));
+	printf("The average wait time is: %f\n", avg_wait_time(finished_jobs, numJobs));
 }
 
 // begin process of the jobs

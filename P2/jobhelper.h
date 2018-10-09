@@ -31,7 +31,7 @@ void jobInitialization(struct Job* j, int i);
 void print_job(struct Job job);
 
 // swap position of the jobs in the array
-void change_position(struct Job* job, int i, int j);
+void change_position(Job* job, int i, int j);
 
 // function to sort the job based on the desired parameter passed
 // sort_parameters
@@ -40,9 +40,18 @@ void change_position(struct Job* job, int i, int j);
 // 2 - priority
 // 3 - remaining service time
 // 4 - finish time
-void job_sort(struct Job* job, int size, int sort_param);
+void job_sort(Job* job, int size, int sort_param);
 
 // function to get the response time
-int response_time(struct Job j);
+int response_time(Job j);
+
+// function to get the average response time
+double avg_response_time(Job* j, int numJobs);
+
+// function to get the average turnaround time
+double avg_turnaround_time(Job* j, int numJobs);
+
+// function to get the average waiting time
+double avg_wait_time(Job* j, int numJobs);
 
 #endif

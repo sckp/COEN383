@@ -62,14 +62,12 @@ void jobs_Pre_HPF(Job* jobs, Job* finished_jobs, int numJobs) {
 			finished_jobs[i].pid, finished_jobs[i].arrival_time, finished_jobs[i].service_time,
 			finished_jobs[i].start_time, finished_jobs[i].finish_time);
 	}
-	
-	printf("\n\n\n");
-	for(int i = 0; i < 256; i++) {
-		if(-1 != results[i].pid) {
-			printf("Job ID: %i\tStart: %i\tEnd: %i\n", results[i].pid, results[i].start, results[i].end);
-		}
-	}
+	// free the memory that was used to hold the results
 	free(results);
+	
+	printf("\nThe average response time is: %f\n", avg_response_time(finished_jobs, numJobs));
+	printf("The average turnaround time is: %f\n", avg_turnaround_time(finished_jobs, numJobs));
+	printf("The average wait time is: %f\n", avg_wait_time(finished_jobs, numJobs));
 }
 
 // begin process of the jobs
@@ -99,6 +97,25 @@ void processJobs_HPF(CPU* cpu, Queue* queue, Job* jobs, Job* completed, int numJ
 			// increment the jobIndex
 			jobIndex_HPF++;
 		}
+		
+		// check if the CPU is not available
+		if(!cpu->available) {  // CPU is not available
+			// job has run for its quanta of time so remove it from the CPU
+			// check which queue the job on the CPU is supposed to be placed back into
+			if(1 == cpu->job->priority) {
+				removeFromCPU_HPF(cpu, queue, completed, 0);
+			}
+			else if(2 == cpu->job->priority) {
+				removeFromCPU_HPF(cpu, queue, completed, 1);
+			}
+			else if(3 == cpu->job->priority) {
+				removeFromCPU_HPF(cpu, queue, completed, 2);
+			}
+			else if(4 == cpu->job->priority) {
+				removeFromCPU_HPF(cpu, queue, completed, 3);
+			}
+		}
+		
 		// check if there is a job on the CPU
 		if(cpu->available) { // CPU is available
 			// check if there is a job in the highest priority queue
@@ -123,22 +140,7 @@ void processJobs_HPF(CPU* cpu, Queue* queue, Job* jobs, Job* completed, int numJ
 			}
 			// otherwise the CPU remains idle
 		}
-		else {  // CPU is not available
-			// job has run for its quanta of time so remove it from the CPU
-			// check which queue the job on the CPU is supposed to be placed back into
-			if(1 == cpu->job->priority) {
-				removeFromCPU_HPF(cpu, queue, completed, 0);
-			}
-			else if(2 == cpu->job->priority) {
-				removeFromCPU_HPF(cpu, queue, completed, 1);
-			}
-			else if(3 == cpu->job->priority) {
-				removeFromCPU_HPF(cpu, queue, completed, 2);
-			}
-			else if(4 == cpu->job->priority) {
-				removeFromCPU_HPF(cpu, queue, completed, 3);
-			}
-		}
+
 		// increment the global clock
 		cpu_clock_HPF++;
 	}

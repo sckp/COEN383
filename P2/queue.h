@@ -10,7 +10,7 @@
 // create a node for use in the queue which
 // holds the pointer to the next one and the
 // job struct
-typedef struct Node {
+struct Node {
 	Job job;
 	struct Node* next;
 } Node;

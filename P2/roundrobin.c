@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <time.h>
 
+#include <unistd.h>
+
 #include "roundrobin.h"
 
 // create a global clock
@@ -14,12 +16,33 @@ const int quanta = 1;
 int jobIndex = 0;
 int finishedIndex = 0;
 
+// struct to hold all of the cpu usuage results
+struct cpu_Use {
+	int pid;
+	int start;
+	int end;
+};
+
+struct cpu_Use* results;
+int result_index;
+
 // function to receive the generated job array from main program
 void jobs_Round_Robin(Job* jobs, Job* finished_jobs, int numJobs) {
 	// create a job queue
 	Queue job_queue;
 	// initialize the job queue
 	initialize(&job_queue);
+	
+	// create an array for all cpu usage results
+	results = malloc(sizeof(struct cpu_Use) * 256);
+	// initialize all results
+	for(int i = 0; i < 256; i++) {
+		results[i].pid = -1;
+		results[i].start = -1;
+		results[i].end = -1;
+	}
+	result_index = 0;
+	
 	// create a CPU instance
 	CPU cpu;
 	// Initialization of the CPU
@@ -53,6 +76,19 @@ void jobs_Round_Robin(Job* jobs, Job* finished_jobs, int numJobs) {
 			finished_jobs[i].start_time, finished_jobs[i].finish_time);
 	}
 	
+	
+	printf("\n\nCPU Time Table:\n");
+	for(int i = 0; i < 256; i++) {
+		if(-1 != results[i].pid) {
+			//printf("Job ID: %i\tStart: %i\tEnd: %i\n", results[i].pid, results[i].start, results[i].end);
+			printf("%i ", results[i].pid);
+		}
+	}
+	printf("\n\n");
+	
+	printf("\nThe average response time is: %f\n", avg_response_time(finished_jobs, numJobs));
+	printf("The average turnaround time is: %f\n", avg_turnaround_time(finished_jobs, numJobs));
+	printf("The average wait time is: %f\n", avg_wait_time(finished_jobs, numJobs));
 }
 
 // begin process of the jobs
@@ -78,6 +114,11 @@ void processJobs(CPU* cpu, Queue* jobQueue, Job* jobs, Job* completed, int numJo
 			// increment the jobIndex
 			jobIndex++;
 		}
+		// remove a job from the cpu if one is there
+		if(!cpu->available) {
+			// job has run for its quanta of time so remove it from the CPU
+			removeFromCPU(cpu, jobQueue, completed);
+		}
 		// check if there is a job on the CPU
 		if(cpu->available) { // CPU is available
 			// check if there is a job on the queue
@@ -86,10 +127,6 @@ void processJobs(CPU* cpu, Queue* jobQueue, Job* jobs, Job* completed, int numJo
 				moveToCPU(cpu, jobQueue);
 			}
 			// otherwise the CPU remains idle
-		}
-		else {  // CPU is not available
-			// job has run for its quanta of time so remove it from the CPU
-			removeFromCPU(cpu, jobQueue, completed);
 		}
 		// increment the global clock
 		cpu_clock++;
@@ -122,6 +159,16 @@ void moveToCPU(CPU* c, Queue* q) {
 // this function removes a job from the CPU and puts it in either
 // the job queue or the completed jobs array
 void removeFromCPU(CPU* c, Queue* q, Job* complete) {
+	
+	if(256 > result_index) {
+		// set the entry for cpu usage results
+		results[result_index].pid = c->job->pid;
+		results[result_index].start = cpu_clock - 1;
+		results[result_index].end = cpu_clock;
+		result_index++;
+	}
+	
+	
 	// decrement the remaining service time for the job
 	c->job->remaining_service_time -= quanta;
 	// check if the job needs to go back into the queue or if it goes in the completed jobs list

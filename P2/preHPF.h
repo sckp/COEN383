@@ -21,5 +21,8 @@ void removeFromCPU_HPF(CPU* c, Queue* q, Job* complete, int queueIndex);
 // when the CPU has passed 100
 void removeJobFromQueue_HPF(Queue* q, Job* complete);
 
+// this function will increment the ages of all the waiting processes
+void ageProcesses(Queue* q);
+
 #endif
 

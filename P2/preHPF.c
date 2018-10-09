@@ -14,25 +14,46 @@ const int quanta_HPF = 1;
 int jobIndex_HPF = 0;
 int finishedIndex_HPF = 0;
 
+// struct to hold all of the cpu usuage results
+struct cpu_Use {
+	int pid;
+	int start;
+	int end;
+};
+
+struct cpu_Use* results;
+int result_index;
+
 // function to receive the generated job array from main program
 void jobs_Pre_HPF(Job* jobs, Job* finished_jobs, int numJobs) {
 	// initialize the 4 job queues
-	Queue* jobQueues = malloc(sizeof(Queue) * 4);
-	
-	// initialize the 4 job queues
+	Queue* jobQueues = malloc(sizeof(Queue) * 4); 
+		// initialize the 4 job queues
 	for(int i = 0; i < 4; i++) {
 		initialize(&jobQueues[i]);
 	}
+	
+	// create an array for all cpu usage results
+	results = malloc(sizeof(struct cpu_Use) * 256);
+	// initialize all results
+	for(int i = 0; i < 256; i++) {
+		results[i].pid = -1;
+		results[i].start = -1;
+		results[i].end = -1;
+	}
+	result_index = 0;
+	
 	// create a CPU instance
 	CPU cpu;
 	// Initialization of the CPU
 	cpu.available = true;
 	// sort the jobs based on arrival time
 	job_sort(jobs, numJobs, 0);
+	
 	// being processing the jobs
 	processJobs_HPF(&cpu, jobQueues, jobs, finished_jobs, numJobs);
 	// sort the completed jobs by their arrival time
-	job_sort(finished_jobs, numJobs, 2);
+	job_sort(finished_jobs, numJobs, 4);
 	
 	printf("\nFinished Jobs Pre HPF:\n");
 	// print jobs based on finish time
@@ -42,6 +63,21 @@ void jobs_Pre_HPF(Job* jobs, Job* finished_jobs, int numJobs) {
 			finished_jobs[i].start_time, finished_jobs[i].finish_time);
 	}
 	
+	printf("\n\nCPU Time Table:\n");
+	for(int i = 0; i < 256; i++) {
+		if(-1 != results[i].pid) {
+			//printf("Job ID: %i\tStart: %i\tEnd: %i\n", results[i].pid, results[i].start, results[i].end);
+			printf("%i ", results[i].pid);
+		}
+	}
+	printf("\n\n");
+	
+	printf("\nThe average response time is: %f\n", avg_response_time(finished_jobs, numJobs));
+	printf("The average turnaround time is: %f\n", avg_turnaround_time(finished_jobs, numJobs));
+	printf("The average wait time is: %f\n", avg_wait_time(finished_jobs, numJobs));
+	
+	// free the memory that was used to hold the results
+	free(results);
 }
 
 // begin process of the jobs
@@ -71,6 +107,25 @@ void processJobs_HPF(CPU* cpu, Queue* queue, Job* jobs, Job* completed, int numJ
 			// increment the jobIndex
 			jobIndex_HPF++;
 		}
+		
+		// check if the CPU is not available
+		if(!cpu->available) {  // CPU is not available
+			// job has run for its quanta of time so remove it from the CPU
+			// check which queue the job on the CPU is supposed to be placed back into
+			if(1 == cpu->job->priority) {
+				removeFromCPU_HPF(cpu, queue, completed, 0);
+			}
+			else if(2 == cpu->job->priority) {
+				removeFromCPU_HPF(cpu, queue, completed, 1);
+			}
+			else if(3 == cpu->job->priority) {
+				removeFromCPU_HPF(cpu, queue, completed, 2);
+			}
+			else if(4 == cpu->job->priority) {
+				removeFromCPU_HPF(cpu, queue, completed, 3);
+			}
+		}
+		
 		// check if there is a job on the CPU
 		if(cpu->available) { // CPU is available
 			// check if there is a job in the highest priority queue
@@ -95,22 +150,7 @@ void processJobs_HPF(CPU* cpu, Queue* queue, Job* jobs, Job* completed, int numJ
 			}
 			// otherwise the CPU remains idle
 		}
-		else {  // CPU is not available
-			// job has run for its quanta of time so remove it from the CPU
-			// check which queue the job on the CPU is supposed to be placed back into
-			if(1 == cpu->job->priority) {
-				removeFromCPU_HPF(cpu, queue, completed, 0);
-			}
-			else if(2 == cpu->job->priority) {
-				removeFromCPU_HPF(cpu, queue, completed, 1);
-			}
-			else if(3 == cpu->job->priority) {
-				removeFromCPU_HPF(cpu, queue, completed, 2);
-			}
-			else if(4 == cpu->job->priority) {
-				removeFromCPU_HPF(cpu, queue, completed, 3);
-			}
-		}
+
 		// increment the global clock
 		cpu_clock_HPF++;
 	}
@@ -133,6 +173,8 @@ void moveToCPU_HPF(CPU* c, Queue* q) {
 		c->job->start_time = q->head->job.start_time;
 	}
 	c->job->finish_time = q->head->job.finish_time;
+	// set the age of the process and return it to zero when it gets the CPU
+	c->job->age = 0;
 	// remove the job from the queue
 	pop(q);
 	// set the cpu to being available
@@ -142,6 +184,17 @@ void moveToCPU_HPF(CPU* c, Queue* q) {
 // this function removes a job from the CPU and puts it in either
 // the job queue or the completed jobs array
 void removeFromCPU_HPF(CPU* c, Queue* q, Job* complete, int queueIndex) {
+	// set the job into the cpu time table
+	if(256 > result_index) {
+		// set the entry for cpu usage results
+		results[result_index].pid = c->job->pid;
+		results[result_index].start = cpu_clock_HPF - 1;
+		results[result_index].end = cpu_clock_HPF;
+		result_index++;
+	}
+	
+	// increment the ages for all waiting processes
+	ageProcesses(q);
 	// decrement the remaining service time for the job
 	c->job->remaining_service_time -= quanta_HPF;
 	// check if the job needs to go back into the queue or if it goes in the completed jobs list
@@ -238,3 +291,43 @@ void removeJobFromQueue_HPF(Queue* q, Job* complete) {
 	}
 }
 
+// this function will increment the ages of all the waiting processes
+// all queues with processes will have their age incremented with the
+// exception of the highest priority queue
+void ageProcesses(Queue* q) {
+	// create an array to hold all waiting jobs
+	int jobSize = queue_size(&q[1]) + queue_size(&q[2]) + queue_size(&q[3]);
+	// if there are no waiting jobs return from the function
+	if(1 > jobSize) {
+		return;
+	}
+	// create an array to hold all of the jobs
+	Job* j = malloc(sizeof(Job) * jobSize);
+	int index = 0;
+	// iterate through all 3 job queues
+	for(int i = 1; i < 4; i++) {
+		while(!isEmpty(&q[i])) {
+			j[index] = front(&q[i]);
+			// increment the age
+			j[index].age++;
+			// increment the index
+			index++;
+			pop(&q[i]);
+		}
+	}
+	// place all the jobs back into their respective queue in proper order
+	// while checking the age for if they need to be upgraded in their priority
+	for(int i = 0; i < jobSize; i++) {
+		// check the age of the job
+		if(6 > j[i].age) {
+			// increase priority
+			j[i].priority--;
+			// reset the age
+			j[i].age = 0;
+		}
+		// put the job into its proper queue
+		push(&q[(j[i].priority - 1)], j[i]);
+	}
+	// free the memory used to hold the jobs
+	free(j);
+}

@@ -15,7 +15,7 @@ int main() {
 	// comment out srand to fix randomization
 	srand(seed);
 	
-	const int number_of_jobs = 20;
+	const int number_of_jobs = 30;
 	
 	struct Job* jobs = malloc(sizeof(Job) * number_of_jobs);
 	for(int i = 0; i < number_of_jobs; i++) {

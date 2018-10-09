@@ -31,5 +31,8 @@ int main() {
 	struct Job* preHPF_jobs = malloc(sizeof(Job) * number_of_jobs);
 	jobs_Pre_HPF(jobs, preHPF_jobs, number_of_jobs);
 	
+    //NON-Preemptive HPF Scheduling
+    struct Job* HPF_jobs = malloc(sizeof(Job) * number_of_jobs);
+    jobs_HPF(jobs, HPF_jobs, number_of_jobs);
 }
 

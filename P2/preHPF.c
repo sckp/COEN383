@@ -319,7 +319,7 @@ void ageProcesses(Queue* q) {
 	// while checking the age for if they need to be upgraded in their priority
 	for(int i = 0; i < jobSize; i++) {
 		// check the age of the job
-		if(6 > j[i].age) {
+		if(5 < j[i].age) {
 			// increase priority
 			j[i].priority--;
 			// reset the age

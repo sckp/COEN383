@@ -21,7 +21,7 @@ void removeFromCPU_nonHPF(CPU* c, Queue* q, Job* complete, int queueIndex);
 // when the CPU has passed 100
 void removeJobFromQueue_nonHPF(Queue* q, Job* complete);
 
-void ageProcessesHPF(Queue *q);
+void ageProcesses_HPF(Queue *q);
 
 #endif
 

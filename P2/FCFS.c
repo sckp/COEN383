@@ -3,11 +3,11 @@
 #include <stdbool.h>
 #include "FCFS.h"
 
-void jobs_FCFS(struct Job* jobs, struct Job* finished, int numJobs) {
+double jobs_FCFS(struct Job* jobs, struct Job* finished, int numJobs) {
     // clock variables
     int cpu_clock = 0;
     int max_time = 100;
-    
+
     // whether there is an element that should be worked on loaded in the queue
     bool cpu_occupied  = false;
 
@@ -25,6 +25,9 @@ void jobs_FCFS(struct Job* jobs, struct Job* finished, int numJobs) {
     int jobs_queued = 0;
     int jobs_finished = 0;
 
+    // if true, next process has not been worked on yet
+    bool fresh = true;
+
     // sort jobs by arrival time
     job_sort(jobs, numJobs, 0);
 
@@ -33,7 +36,7 @@ void jobs_FCFS(struct Job* jobs, struct Job* finished, int numJobs) {
 
         // load any new jobs into the queue
         while(jobs_queued < numJobs && jobs_increment->arrival_time == cpu_clock) {
-            jobs_increment->start_time = cpu_clock;
+            // jobs_increment->start_time = cpu_clock;
             job_queue_back++;
             queue[job_queue_back] = *jobs_increment;
             jobs_increment++;
@@ -50,38 +53,50 @@ void jobs_FCFS(struct Job* jobs, struct Job* finished, int numJobs) {
 
         // cpu is occupied, so a job should be worked on
         if(cpu_occupied) {
+            // first time running
+            if(fresh == true) {
+              queue[job_queue_front].start_time = cpu_clock;
+            }
             queue[job_queue_front].remaining_service_time--;
+            printf("%d ", queue[job_queue_front].pid);
+            fresh = false;
             if(queue[job_queue_front].remaining_service_time == 0) {
                 *finished_increment = queue[job_queue_front];
                 finished_increment->finish_time = cpu_clock;
+                fresh = true;
                 finished_increment++;
                 jobs_finished++;
                 job_queue_front++;
             }
+          } else {
+            printf("Idle ");
           }
         // incrememnt clock
         cpu_clock++;
     }
 
-    printf("\nDone with loading. Jobs finished = %d\n job queue back = %d\n\n", jobs_finished, job_queue_back);
-
-
-    // I have commented out this block because for this scheduling algorithm, I don't think I want to do this
-
-    // finsih up everything else in the queue that was added before the clock went to 100
-    // while(job_queue_front <= job_queue_back) {
-    //   queue[job_queue_front].remaining_service_time--;
-    //   if(queue[job_queue_front].remaining_service_time == 0) {
-    //         *finished_increment = queue[job_queue_front];
-    //         finished_increment->finish_time = cpu_clock;
-    //         print_job(*finished_increment);
-    //         finished_increment++;
-    //         jobs_finished++;
-    //         job_queue_front++;
-    //     }
-    //     cpu_clock++;
-    // }
+    // finsih up last process in queue that was started before the clock went to 100
+    while(!fresh && (job_queue_front <= job_queue_back)) {
+      queue[job_queue_front].remaining_service_time--;
+      if(queue[job_queue_front].remaining_service_time == 0) {
+        *finished_increment = queue[job_queue_front];
+        finished_increment->finish_time = cpu_clock;
+        finished_increment++;
+        jobs_finished++;
+        job_queue_front++;
+        break;
+      }
+      cpu_clock++;
+    }
 
     // free memory from the temporary queue I made
     free(queue);
+    double avg_rt = avg_response_time(finished, jobs_finished);
+    double avg_tt = avg_turnaround_time(finished, jobs_finished);
+    double avg_wt = avg_wait_time(finished, jobs_finished);
+    printf("\nAverage Response Time:  %f\n", avg_rt);
+    printf("Average Turnaround Time:  %f\n", avg_tt);
+    printf("Average Wait Time:  %f\n", avg_wt);
+    double throughput = ((double) jobs_finished / 100);
+    return throughput;
 }

@@ -5,6 +5,7 @@
 #include "jobhelper.h"
 #include "queue.h"
 #include "preHPF.h"
+#include "HPF.h"
 
 // header for round robin scheduler
 #include "roundrobin.h"
@@ -22,17 +23,22 @@ int main() {
 		jobInitialization(&jobs[i], i);
 	}
 	
-		
+	
 	// Round Robin Scheduling
 	struct Job* RR_jobs = malloc(sizeof(Job) * number_of_jobs);
 	jobs_Round_Robin(jobs, RR_jobs, number_of_jobs);
+	
+	
 	
 	// Preemptive HPF Scheduling
 	struct Job* preHPF_jobs = malloc(sizeof(Job) * number_of_jobs);
 	jobs_Pre_HPF(jobs, preHPF_jobs, number_of_jobs);
 	
+	
+	/*
     //NON-Preemptive HPF Scheduling
     struct Job* HPF_jobs = malloc(sizeof(Job) * number_of_jobs);
     jobs_HPF(jobs, HPF_jobs, number_of_jobs);
+    */
 }
 

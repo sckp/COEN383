@@ -51,17 +51,6 @@ void jobs_Round_Robin(Job* jobs, Job* finished_jobs, int numJobs) {
 	// sort the jobs based on arrival time
 	job_sort(jobs, numJobs, 0);
 	
-	/*
-	printf("Jobs to process:\n");
-	// print jobs based on finish time
-	for(int i = 0; i < numJobs; i++) {
-		printf("ID: %i\tarrival time: %i   service time: %i\tstart time: %i\tfinish time: %i\n",
-			jobs[i].pid, jobs[i].arrival_time, jobs[i].service_time,
-			jobs[i].start_time, jobs[i].finish_time);
-	}
-	printf("\n\n");
-	*/
-	
 	// being processing the jobs
 	processJobs(&cpu, &job_queue, jobs, finished_jobs, numJobs);
 	// sort the completed jobs by their arrival time
@@ -69,13 +58,12 @@ void jobs_Round_Robin(Job* jobs, Job* finished_jobs, int numJobs) {
 	
 	
 	printf("Finished Jobs RR:\n");
-	// print jobs based on finish time
+	// print completed jobs
 	for(int i = 0; i < numJobs; i++) {
-		printf("ID: %i\tarrival time: %i   service time: %i\tstart time: %i\tfinish time: %i\n",
-			finished_jobs[i].pid, finished_jobs[i].arrival_time, finished_jobs[i].service_time,
-			finished_jobs[i].start_time, finished_jobs[i].finish_time);
+		printf("Job ID: %i\tArrival Time: %i  Service Time: %i\tPriority: %i\n",
+			finished_jobs[i].pid, finished_jobs[i].arrival_time,
+			finished_jobs[i].service_time, finished_jobs[i].priority);
 	}
-	
 	
 	printf("\n\nCPU Time Table:\n");
 	for(int i = 0; i < 256; i++) {
@@ -89,6 +77,8 @@ void jobs_Round_Robin(Job* jobs, Job* finished_jobs, int numJobs) {
 	printf("\nThe average response time is: %f\n", avg_response_time(finished_jobs, numJobs));
 	printf("The average turnaround time is: %f\n", avg_turnaround_time(finished_jobs, numJobs));
 	printf("The average wait time is: %f\n", avg_wait_time(finished_jobs, numJobs));
+	// print the throughput
+	throughput_RR(finished_jobs, numJobs);
 }
 
 // begin process of the jobs
@@ -128,6 +118,16 @@ void processJobs(CPU* cpu, Queue* jobQueue, Job* jobs, Job* completed, int numJo
 			}
 			// otherwise the CPU remains idle
 		}
+		
+		// if cpu is still available it means it will remain idle
+		if(cpu->available) {
+			// put that the cpu was idle
+			if((256 > result_index) && (finishedIndex < numJobs)){
+				// set the entry for cpu usage results
+				results[result_index].pid = -2;
+				result_index++;
+			}
+		}
 		// increment the global clock
 		cpu_clock++;
 	}
@@ -159,7 +159,7 @@ void moveToCPU(CPU* c, Queue* q) {
 // this function removes a job from the CPU and puts it in either
 // the job queue or the completed jobs array
 void removeFromCPU(CPU* c, Queue* q, Job* complete) {
-	
+	// set up the cpu time table results
 	if(256 > result_index) {
 		// set the entry for cpu usage results
 		results[result_index].pid = c->job->pid;
@@ -167,7 +167,6 @@ void removeFromCPU(CPU* c, Queue* q, Job* complete) {
 		results[result_index].end = cpu_clock;
 		result_index++;
 	}
-	
 	
 	// decrement the remaining service time for the job
 	c->job->remaining_service_time -= quanta;
@@ -229,4 +228,21 @@ void removeJobFromQueue(Queue* q, Job* complete) {
 		push(q, temp.head->job);
 		pop(&temp);
 	}
+}
+
+// this function calculates the throughput for 100 quanta
+void throughput_RR(Job* j, int numJobs) {
+	double completedInTime = 0;
+	double endTime = 0;
+	for(int i = 0; i < numJobs; i++) {
+		// check which jobs completed in 100 quanta
+		if(-1 != j[i].start_time) {
+			completedInTime++;
+		}
+		if(endTime < j[i].finish_time) {
+			endTime = j[i].finish_time;
+		}
+	}
+	// print the throughput
+	printf("The throughput rate is: %f\n", (completedInTime / endTime));
 }

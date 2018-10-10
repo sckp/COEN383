@@ -21,4 +21,7 @@ void removeFromCPU(CPU* c, Queue* q, Job* complete);
 // when the CPU has passed 100
 void removeJobFromQueue(Queue* q, Job* complete);
 
+// this function calculates the throughput for 100 quanta
+void throughput_RR(Job* j, int numJobs);
+
 #endif

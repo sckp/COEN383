@@ -50,32 +50,41 @@ void jobs_Pre_HPF(Job* jobs, Job* finished_jobs, int numJobs) {
 	// sort the jobs based on arrival time
 	job_sort(jobs, numJobs, 0);
 	
+	printf("\nJobs Pre HPF before aging:\n");
+	// print completed jobs
+	for(int i = 0; i < numJobs; i++) {
+		printf("Job ID: %i\tArrival Time: %i  Service Time: %i\tPriority: %i\n",
+			jobs[i].pid, jobs[i].arrival_time,
+			jobs[i].service_time, jobs[i].priority);
+	}
+	
 	// being processing the jobs
 	processJobs_HPF(&cpu, jobQueues, jobs, finished_jobs, numJobs);
 	// sort the completed jobs by their arrival time
 	job_sort(finished_jobs, numJobs, 4);
 	
-	printf("\nFinished Jobs Pre HPF:\n");
-	// print jobs based on finish time
+
+	printf("\nFinished Jobs Pre HPF after aging:\n");
+	// print completed jobs
 	for(int i = 0; i < numJobs; i++) {
-		printf("ID: %i\tarrival time: %i   service time: %i\tstart time: %i\tfinish time: %i\n",
-			finished_jobs[i].pid, finished_jobs[i].arrival_time, finished_jobs[i].service_time,
-			finished_jobs[i].start_time, finished_jobs[i].finish_time);
+		printf("Job ID: %i\tArrival Time: %i  Service Time: %i\tPriority: %i\n",
+			finished_jobs[i].pid, finished_jobs[i].arrival_time,
+			finished_jobs[i].service_time, finished_jobs[i].priority);
 	}
 	
-	printf("\n\nCPU Time Table:\n");
+	printf("\n\nCPU Time Table: -2 represents the CPU being idle\n");
 	for(int i = 0; i < 256; i++) {
 		if(-1 != results[i].pid) {
-			//printf("Job ID: %i\tStart: %i\tEnd: %i\n", results[i].pid, results[i].start, results[i].end);
 			printf("%i ", results[i].pid);
 		}
 	}
 	printf("\n\n");
-	
+	// print the averages
 	printf("\nThe average response time is: %f\n", avg_response_time(finished_jobs, numJobs));
 	printf("The average turnaround time is: %f\n", avg_turnaround_time(finished_jobs, numJobs));
 	printf("The average wait time is: %f\n", avg_wait_time(finished_jobs, numJobs));
-	
+	// print the throughput
+	throughput_preHPF(finished_jobs, numJobs);
 	// free the memory that was used to hold the results
 	free(results);
 }
@@ -150,7 +159,16 @@ void processJobs_HPF(CPU* cpu, Queue* queue, Job* jobs, Job* completed, int numJ
 			}
 			// otherwise the CPU remains idle
 		}
-
+		
+		// if the cpu is still available here, it means that it has to be idle
+		if(cpu->available) {
+			// put that the cpu was idle
+			if((256 > result_index) && (finishedIndex_HPF < numJobs)){
+				// set the entry for cpu usage results
+				results[result_index].pid = -2;
+				result_index++;
+			}
+		}
 		// increment the global clock
 		cpu_clock_HPF++;
 	}
@@ -330,4 +348,74 @@ void ageProcesses(Queue* q) {
 	}
 	// free the memory used to hold the jobs
 	free(j);
+}
+
+// function to calculate the throughputs for all of the queues
+void throughput_preHPF(Job* j, int numJobs) {
+	// create variables to count how many jobs completed at which priority
+	double q1 = 0;
+	double q2 = 0;
+	double q3 = 0;
+	double q4 = 0;
+	// create variables to hold the ending times for each queue
+	double endQ1 = 1;
+	double endQ2 = 1;
+	double endQ3 = 1;
+	double endQ4 = 1;
+	// find out how many jobs finished in which queue
+	for(int i = 0; i < numJobs; i++) {
+		// check if it is priority level 1
+		if((1 == j[i].priority) && (-1 != j[i].start_time)){
+			q1++;
+			if(endQ1 < j[i].finish_time) {
+				endQ1 = j[i].finish_time;
+			}
+		}
+		// check if it is priority level 2
+		else if((2 == j[i].priority) && (-1 != j[i].start_time)){
+			q2++;
+			if(endQ2 < j[i].finish_time) {
+				endQ2 = j[i].finish_time;
+			}
+		}
+		// check if it is priority level 3
+		else if((3 == j[i].priority) && (-1 != j[i].start_time)){
+			q3++;
+			if(endQ3 < j[i].finish_time) {
+				endQ3 = j[i].finish_time;
+			}
+		}
+		// check if it is priority level 4
+		else if((4 == j[i].priority) && (-1 != j[i].start_time)){
+			q4++;
+			if(endQ4 < j[i].finish_time) {
+				endQ4 = j[i].finish_time;
+			}
+		}
+	}
+	// print out the throughput for each priority level
+	if(0 < q1) {
+		printf("Throughput for priority level 1: %f\n", (q1 / endQ1));
+	}
+	else {
+		printf("No jobs completed for priority level 1\n");
+	}
+	if(0 < q2) {
+		printf("Throughput for priority level 2: %f\n", (q2 / endQ2));
+	}
+	else {
+		printf("No jobs completed for priority level 2\n");
+	}
+	if(0 < q3) {
+		printf("Throughput for priority level 3: %f\n", (q3 / endQ3));
+	}
+	else {
+		printf("No jobs completed for priority level 3\n");
+	}
+	if(0 < q4) {
+		printf("Throughput for priority level 4: %f\n", (q4 / endQ4));
+	}
+	else {
+		printf("No jobs completed for priority level 4\n");
+	}
 }

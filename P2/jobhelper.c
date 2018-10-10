@@ -130,7 +130,7 @@ double avg_response_time(Job* j, int numJobs) {
 	// add up all of the response times
 	for(int i = 0; i < numJobs; i++) {
 		if(-1 != j[i].start_time) {
-			avgResponse = (j[i].start_time - j[i].arrival_time);
+			avgResponse += (j[i].start_time - j[i].arrival_time);
 		}
 		else {
 			notRunJobs++;
@@ -149,7 +149,7 @@ double avg_turnaround_time(Job* j, int numJobs) {
 	// add up all of the turnaround times
 	for(int i = 0; i < numJobs; i++) {
 		if(-1 != j[i].start_time) {
-			avgTAT = (j[i].finish_time - j[i].arrival_time);
+			avgTAT += (j[i].finish_time - j[i].arrival_time);
 		}
 		else {
 			notRunJobs++;
@@ -168,7 +168,7 @@ double avg_wait_time(Job* j, int numJobs) {
 	// add up all of the wait times
 	for(int i = 0; i < numJobs; i++) {
 		if(-1 != j[i].start_time) {
-			avgWait = (j[i].finish_time - j[i].service_time);
+			avgWait += (j[i].finish_time - j[i].service_time);
 		}
 		else {
 			notRunJobs++;

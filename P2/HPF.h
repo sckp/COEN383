@@ -1,5 +1,5 @@
-#ifndef PREHPF_H
-#define PREHPF_H
+#ifndef HPF_H
+#define HPF_H
 
 #include "jobhelper.h"
 #include "queue.h"

@@ -24,5 +24,8 @@ void removeJobFromQueue_HPF(Queue* q, Job* complete);
 // this function will increment the ages of all the waiting processes
 void ageProcesses(Queue* q);
 
+// function to calculate the throughputs for all of the queues
+void throughput_preHPF(Job* j, int numJobs);
+
 #endif
 

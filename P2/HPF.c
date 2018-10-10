@@ -55,7 +55,7 @@ void jobs_HPF(Job* jobs, Job* finished_jobs, int numJobs) {
     //?
     job_sort(finished_jobs, numJobs, 4);
     
-    printf("\nFinished Jobs Pre HPF:\n");
+    printf("\nFinished Jobs HPF:\n");
     //PRINT JOBS BASED OFF FINISH TIME
     for(int i = 0; i < numJobs; i++) {
         printf("ID: %i\tarrival time: %i   service time: %i\tstart time: %i\tfinish time: %i\n",

@@ -77,6 +77,7 @@ void jobs_SJF(Job* jobs, Job* finished_jobs, int numJobs) {
 			avg_turnaround_time(finished_jobs, numJobs));
 	printf("The average wait time is: %f\n",
 			avg_wait_time(finished_jobs, numJobs));
+	throughput_SJF(finished_jobs, numJobs);
 }
 
 void processJobs_SJF(CPU* cpu, Queue* jobQueue, Job* jobs, Job* completed,
@@ -209,4 +210,21 @@ void removeJobFromQueue_SJF(Queue* q, Job* complete) {
 		push(q, temp.head->job);
 		pop(&temp);
 	}
+}
+
+// this function calculates the throughput
+void throughput_SJF(Job* j, int numJobs) {
+	double completedInTime = 0;
+	double endTime = 0;
+	for(int i = 0; i < numJobs; i++) {
+		// check which jobs completed in 100 quanta
+		if(-1 != j[i].start_time) {
+			completedInTime++;
+		}
+		if(endTime < j[i].finish_time) {
+			endTime = j[i].finish_time;
+		}
+	}
+	// print the throughput
+	printf("The throughput rate is: %f\n", (completedInTime / endTime));
 }

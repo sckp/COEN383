@@ -9,7 +9,8 @@
 
 // header for round robin scheduler
 #include "roundrobin.h"
-
+// header for Shortest Job First
+#include "SJF.h"
 
 int main() {
 	int seed = time(NULL);
@@ -40,5 +41,10 @@ int main() {
     struct Job* HPF_jobs = malloc(sizeof(Job) * number_of_jobs);
     jobs_HPF(jobs, HPF_jobs, number_of_jobs);
     */
+	
+	// Shortest Job First Scheduling
+	struct Job* SJF_jobs = malloc(sizeof(Job) * number_of_jobs);
+	jobs_SJF(jobs, SJF_jobs, number_of_jobs);
+
 }
 

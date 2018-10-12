@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+
+// thread library
 #include <pthread.h>
+
 
 pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
@@ -28,7 +31,26 @@ void wakeup_all_seller_threads() {
 }
 	 
 
-int main() {
+int main(int argc, char* argv[]) {
+	// set a default value for the number of customers per queue
+	int customers_per_queue = 10;
+	
+	// check if the user entered a desired number for customers per queue
+	if(2 > argc) {
+		printf("No size entered for customers per queue.\nUsing default of 10 customers per queue.\n");
+	}
+	else {
+		// check if the supplied argument is a number
+		if(0 < atoi(argv[1])) {
+			customers_per_queue =  atoi(argv[1]);
+			printf("Each queue will have %i customers.\n", customers_per_queue);
+		}
+		else {
+			printf("Input is not valid.\nUsing default of 10 customers per queue.\n");
+		}
+	}
+	
+	
 	int i;
 	pthread_t tids[10];
 	char seller_type;

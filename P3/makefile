@@ -5,7 +5,7 @@ CFLAGS = -Wall
 # specify which libraries to use
 LDFLAGS = -pthread
 #set the object files
-OBJFILES = main.o 
+OBJFILES = main.o customer.o
 # specify the name of the desired output file
 TARGET = sellers
 

@@ -1,5 +1,5 @@
 # set the compiler
-CC = gcc
+CC = g++
 # set the flags
 CFLAGS = -Wall
 # specify which libraries to use

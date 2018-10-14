@@ -1,8 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 // thread library
 #include <pthread.h>
+// cpp queue container
+#include <queue>
+
+// customer files
+#include "customer.h"
 
 
 pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
@@ -32,6 +38,10 @@ void wakeup_all_seller_threads() {
 	 
 
 int main(int argc, char* argv[]) {
+	// initalize the seed for random arrival time
+	int seed = time(NULL);
+	srand(seed);
+	
 	// set a default value for the number of customers per queue
 	int customers_per_queue = 10;
 	
@@ -50,6 +60,31 @@ int main(int argc, char* argv[]) {
 		}
 	}
 	
+	
+	
+	// create a priority queue for each seller
+	std::priority_queue<Customer> q[10];
+	
+	// populate each queue
+	for(int i = 0; i < 10; i++) {
+		// generate each customer for the queue
+		for(int j = 0; j < customers_per_queue; j++) {
+			Customer c;
+			generate_customer(&c, j);
+			q[i].push(c);
+		}
+	}
+	
+/*
+	// print all of the customers
+	for(int i = 0; i < 10; i++) {
+		printf("Queue %i's customers:\n", i);
+		while(!q[i].empty()) {
+			printf("\tCustomer: %i\tArrival Time: %i\n", q[i].top().ID, q[i].top().arrival_time);
+			q[i].pop();
+		}
+	}
+*/
 	
 	int i;
 	pthread_t tids[10];

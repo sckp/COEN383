@@ -11,6 +11,7 @@ typedef struct Customer {
 	
 } Customer;
 
+// overload the operators for the priority queues
 bool operator<(const Customer& c, const Customer& d);
 bool operator<=(const Customer& c, const Customer& d);
 

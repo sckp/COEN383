@@ -12,6 +12,7 @@
 // additional files
 #include "customer.h"
 #include "helper.h"
+#include "seller.h"
 
 pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
@@ -70,18 +71,26 @@ int main(int argc, char* argv[]) {
 	std::string concert_seats[10][10];
 	// initialize the seating chart
 	initialize_concert(concert_seats);
-	// create a priority queue for each seller
-	std::priority_queue<Customer> q[10];
 	
-	// populate each queue
+	// create 10 seller classes
+	Seller seller[10];
+	seller[0].initialize_seller("H0", customers_per_queue);
+	seller[1].initialize_seller("M1", customers_per_queue);
+	seller[2].initialize_seller("M2", customers_per_queue);
+	seller[3].initialize_seller("M3", customers_per_queue);
+	seller[4].initialize_seller("L1", customers_per_queue);
+	seller[5].initialize_seller("L2", customers_per_queue);
+	seller[6].initialize_seller("L3", customers_per_queue);
+	seller[7].initialize_seller("L4", customers_per_queue);
+	seller[8].initialize_seller("L5", customers_per_queue);
+	seller[9].initialize_seller("L6", customers_per_queue);
+	
+	
+	// print the 10 seller queues
 	for(int i = 0; i < 10; i++) {
-		// generate each customer for the queue
-		for(int j = 0; j < customers_per_queue; j++) {
-			Customer c;
-			generate_customer(&c, j);
-			q[i].push(c);
-		}
+		seller[i].print_seller_queue();
 	}
+	
 	
 	
 	concert_seats[0][4] = '9';
@@ -120,13 +129,6 @@ int main(int argc, char* argv[]) {
 		pthread_join(tids[i], NULL);
 	}
 	
-	
-	
-	Customer d;
-	generate_customer(&d, 19);
-	
-	clock_time = 9;
-	print_purchase(clock_time, &d);
 	
 	// print out the concert seating
 	print_seats(concert_seats);

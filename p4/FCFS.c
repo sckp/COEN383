@@ -12,4 +12,5 @@ void FCFS (page * page_list) {
   
   //TODO print record
   evict -> pid = -1;
+  evict -> page_num = -1;
 }

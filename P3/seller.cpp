@@ -1,73 +1,67 @@
 #include "seller.h"
 
-// default constructor for seller class
-Seller::Seller() {
-	seller_type = "";
-	
+// static function to start threading from within the constructor
+static void* sell_x(void* object) {
+  ((Seller*) object)->sell();
+  return NULL;
 }
 
-// constructor with one argument
-Seller::Seller(std::string s) {
-	seller_type = s;
+Seller::Seller(std::string seats[][10], char seller_type) {
+  concert_seats = seats;
+  this->seller_type = seller_type;
+  // pass pthread_create "this" to call a member function in sell_x
+  pthread_create(&my_thread, NULL, sellx, (void*) this);
 }
 
-// 2 argument constructor
-Seller::Seller(std::string s, int n) {
-	seller_type = s;
-	fill_queue(n);
-}
 
-// setter function to set the seller type
-void Seller::set_seller_type(std::string s) {
-	seller_type = s;
-}
+void Seller::sell() {
+	pthread_mutex_lock(&mutex_condition);
+	pthread_cond_wait(&cond_go, &mutex_condition);
+	pthread_mutex_unlock(&mutex_condition);
+	while(!isEmpty() && clock_time < max_time) {
+    while(clock_time < q.top().arrival_time) {
 
-// function to populate the sellers queue
-void Seller::fill_queue(int n) {
-	for(int i = 0; i < n; i++) {
-		Customer c;
-		generate_customer(&c, i);
-		customer_queue.push(c);
+		}
+		pthread_mutex_lock(&mutex_sell);
+    pthread_mutex_lock(&print_lock);
+    // std::cout << std::endl;
+    // std::cout << clock_time << std::endl;
+    // std::cout << q.top().arrival_time << std::endl;
+    // std::cout << q.top().ID << std::endl;
+    // std::cout << seller_type << std::endl;
+    // std::cout << std::endl;
+
+    /*
+      Do logic for dispencing tickets
+    */
+
+
+    pthread_mutex_unlock(&print_lock);
+    q.pop();
+		pthread_mutex_unlock(&mutex_sell);
 	}
 }
 
-// function to initialize seller without using the constructor
-void Seller::initialize_seller(std::string s, int n) {
-	seller_type = s;
-	fill_queue(n);
+bool Seller::isEmpty() {
+  if(this->q.empty() == true) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
-// function to get random service time
-int Seller::get_service_time() {
-	// for H: 1-2 minutes
-	if('H' == seller_type[0]) {
-		return ((rand() % 2) + 1);
-	}
-	// for M: 2, 3, or 4 minutes
-	else if('M' == seller_type[0]) {
-		return ((rand() % 3) + 2);
-	}
-	// for L: 4, 5, 6, or 7 minutes
-	else if('L' == seller_type[0]) {
-		return ((rand() % 4) + 4);
-	}
+void Seller::setSellerType(char seller_type) {
+  this->seller_type = seller_type;
 }
 
-// function for selling tickets
-void* Seller::sell() {
-	
+void Seller::push_queue(Customer c) {
+  this->q.push(c);
 }
 
-// function to print seller queue
-void Seller::print_seller_queue() {
-	printf("Seller: %s\n", seller_type.c_str());
-	while(!customer_queue.empty()) {
-		printf("ID: %i\tArrival Time: %i\n", customer_queue.top().ID, customer_queue.top().arrival_time);
-		customer_queue.pop();
-	}
-	printf("\n");
+Customer Seller::pop_queue() {
+  this->q.pop();
 }
 
-
-
-
+pthread_t Seller::getThread() {
+  return my_thread;
+}

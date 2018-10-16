@@ -2,11 +2,14 @@
 #include <stdlib.h>
 #include <time.h>
 
+// for sleeping
+#include <unistd.h>
+
 // thread library
 #include <pthread.h>
 // cpp queue container
 #include <queue>
-// for the concert seats will be a string array
+// for the concert seats will be a string vector
 #include <string>
 
 // additional files
@@ -14,33 +17,28 @@
 #include "helper.h"
 #include "seller.h"
 
-pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
-pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
+// condition for threads to begin
+pthread_cond_t cond_go = PTHREAD_COND_INITIALIZER;
 
-int clock_time;
+// mutex for waiting on condition
+pthread_mutex_t mutex_condition = PTHREAD_MUTEX_INITIALIZER;
 
-// seller thread to serve one time slice (1 minute)
-void* sell(void* s_type) {
-	//char* seller_type = (char*) s_type;
-	/*
-	while(having more work todo) {
-		pthread_mutex_lock(&mutex);
-		pthread_cond_wait(&cond, &mutex);
-		pthread_mutex_unlock(&mutex);
-		// serve any buyer available in this seller queue that is ready
-		// now to buy ticket till done with all relevant buyers in their queue
-		.......
-	}
-	*/
-	return NULL; // thread exits
-}
+// mutex for threads editing seat chart
+pthread_mutex_t mutex_sell = PTHREAD_MUTEX_INITIALIZER;
+
+// for debugging within the thread, a mutex is needed
+pthread_mutex_t print_lock = PTHREAD_MUTEX_INITIALIZER;
+
+volatile int clock_time;
+int max_time = 60;
+
 
 void wakeup_all_seller_threads() {
-	pthread_mutex_lock(&mutex);
-	pthread_cond_broadcast(&cond);
-	pthread_mutex_unlock(&mutex);
+	pthread_mutex_lock(&mutex_condition);
+	pthread_cond_broadcast(&cond_go);
+	pthread_mutex_unlock(&mutex_condition);
 }
-	 
+
 
 int main(int argc, char* argv[]) {
 	// initalize the seed for random arrival time
@@ -48,10 +46,10 @@ int main(int argc, char* argv[]) {
 	srand(seed);
 	// initialize the clock time to 0
 	clock_time = 0;
-	
+
 	// set a default value for the number of customers per queue
 	int customers_per_queue = 10;
-	
+
 	// check if the user entered a desired number for customers per queue
 	if(2 > argc) {
 		printf("No size entered for customers per queue.\nUsing default of 10 customers per queue.\n");
@@ -66,78 +64,67 @@ int main(int argc, char* argv[]) {
 			printf("Input is not valid.\nUsing default of 10 customers per queue.\n");
 		}
 	}
-	
+
 	// create the 2d array to represent the 10x10 seating arrangement
 	std::string concert_seats[10][10];
 	// initialize the seating chart
 	initialize_concert(concert_seats);
-	
-	// create 10 seller classes
-	Seller seller[10];
-	seller[0].initialize_seller("H0", customers_per_queue);
-	seller[1].initialize_seller("M1", customers_per_queue);
-	seller[2].initialize_seller("M2", customers_per_queue);
-	seller[3].initialize_seller("M3", customers_per_queue);
-	seller[4].initialize_seller("L1", customers_per_queue);
-	seller[5].initialize_seller("L2", customers_per_queue);
-	seller[6].initialize_seller("L3", customers_per_queue);
-	seller[7].initialize_seller("L4", customers_per_queue);
-	seller[8].initialize_seller("L5", customers_per_queue);
-	seller[9].initialize_seller("L6", customers_per_queue);
-	
-	
-	// print the 10 seller queues
-	for(int i = 0; i < 10; i++) {
-		seller[i].print_seller_queue();
-	}
-	
-	
-	
-	concert_seats[0][4] = '9';
-	concert_seats[2][3] = '8';
-	concert_seats[5][7] = '7';
-	concert_seats[9][9] = '4';
-	
-	
-	
+
+	// create seller instance array
+	Seller* sellers[10];
+	// create thread array to store seller threads
 	pthread_t tids[10];
-	char seller_type;
-	
-	// create necessary data structures for the simulator
-	// create buyers list for each seller ticket queue based on the 
-	// N value within an hour and have them in the seller queue
-	
-	// create 10 threads representing the 10 sellers
-	seller_type = 'H';
-	pthread_create(&tids[0], NULL, sell, (void*) &seller_type);
-	
-	seller_type = 'M';
-	for(int i = 0; i < 4; i++) {
-		pthread_create(&tids[i], NULL, sell, (void*) &seller_type);
+
+
+	// create sellers and their queues
+	sellers[0] = new Seller(concert_seats, 'H');
+	tids[0] = sellers[0]->getThread();
+	for(int j = 0; j < customers_per_queue; j++) {
+		Customer c;
+		generate_customer(&c, j);
+		sellers[0]->push_queue(c);
 	}
-	
-	seller_type = 'L';
-	for(int i = 4; i < 10; i++) {
-		pthread_create(&tids[i], NULL, sell, (void*) &seller_type);
+
+	for(int i=1; i<4; i++) {
+		sellers[0] = new Seller(concert_seats, 'M');
+		tids[0] = sellers[0]->getThread();
+		for(int j = 0; j < customers_per_queue; j++) {
+			Customer c;
+			generate_customer(&c, j);
+			sellers[0]->push_queue(c);
+		}
 	}
-	
-	// wakeup all seller threads
+
+	for(int i=4; i<10; i++) {
+		sellers[0] = new Seller(concert_seats, 'L');
+		tids[0] = sellers[0]->getThread();
+		for(int j = 0; j < customers_per_queue; j++) {
+			Customer c;
+			generate_customer(&c, j);
+			sellers[0]->push_queue(c);
+		}
+	}
+
+	// sleep 1 second to make sure all threads have been created and are waiting
+	sleep(1);
 	wakeup_all_seller_threads();
-	
+
+	// do work on thre threads while incrementing time
+	// sleep is here for now as I am unsure how to wait for all of the threads to be waiting on the conditional
+	while(clock_time < max_time) {
+		sleep(1);
+		clock_time++;
+	}
+
 	// wait for all seller threads to exit
 	for(int i = 0; i < 10; i++) {
 		pthread_join(tids[i], NULL);
 	}
-	
-	
-	// print out the concert seating
-	print_seats(concert_seats);
-	
+
+	// free all of the sellers
+	for(int i=0; i<10; i++) {
+		free(sellers[i]);
+	}
+
 	exit(0);
 }
-
-
-
-
-
-

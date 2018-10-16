@@ -4,10 +4,11 @@
 int clock;
 
 typedef struct {
-  int pid;
+  int pid; //job 
   int page_num;
   struct page* next;
-  
+   
+  int LFU_count; //count for LFU
   int first_timestamp; //first time in memeory
   int last_timestamp; //last time used
 } page;

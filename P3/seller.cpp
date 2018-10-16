@@ -36,6 +36,21 @@ void Seller::sell() {
 
     /*
       Do logic for dispencing tickets
+    int lowSale, highSale;
+    **increment current sale time need to find variable**
+    if (seller_type == "H") {
+    	lowSale = 1;
+	highSale = 2;
+    } else if (seller_type == "M") {
+    	lowSale = 2;
+	highSale = 4;
+    } else {
+    	lowSale = 7;
+	highSale = 4;
+    }
+    if (current sale time == highSale || (current sale time >= lowSale && rand()%2 == 0)) {
+    	
+    }
     */
 
 

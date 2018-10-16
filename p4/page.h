@@ -8,7 +8,7 @@ typedef struct {
   int page_num;
   struct page* next;
    
-  int LFU_count; //count for LFU
+  int LFU_count; //count for LFU and MFU
   int first_timestamp; //first time in memeory
   int last_timestamp; //last time used
 } page;

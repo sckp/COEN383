@@ -86,22 +86,22 @@ int main(int argc, char* argv[]) {
 	}
 
 	for(int i=1; i<4; i++) {
-		sellers[0] = new Seller(concert_seats, 'M');
-		tids[0] = sellers[0]->getThread();
+		sellers[i] = new Seller(concert_seats, 'M');
+		tids[i] = sellers[0]->getThread();
 		for(int j = 0; j < customers_per_queue; j++) {
 			Customer c;
 			generate_customer(&c, j);
-			sellers[0]->push_queue(c);
+			sellers[i]->push_queue(c);
 		}
 	}
 
 	for(int i=4; i<10; i++) {
-		sellers[0] = new Seller(concert_seats, 'L');
-		tids[0] = sellers[0]->getThread();
+		sellers[i] = new Seller(concert_seats, 'L');
+		tids[i] = sellers[0]->getThread();
 		for(int j = 0; j < customers_per_queue; j++) {
 			Customer c;
 			generate_customer(&c, j);
-			sellers[0]->push_queue(c);
+			sellers[i]->push_queue(c);
 		}
 	}
 

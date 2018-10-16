@@ -76,15 +76,15 @@ int main(int argc, char* argv[]) {
 	pthread_t tids[10];
 
 
-	// create sellers and their queues
+	// create H ticket seller
 	sellers[0] = new Seller(concert_seats, "H0", customers_per_queue);
 	tids[0] = sellers[0]->getThread();
-
+	// create 3 M ticket sellers
 	for(int i = 1; i < 4; i++) {
 		sellers[i] = new Seller(concert_seats, "M" + std::to_string(i), customers_per_queue);
 		tids[i] = sellers[i]->getThread();
 	}
-
+	// create 6 L ticket sellers
 	for(int i = 4; i < 10; i++) {
 		sellers[i] = new Seller(concert_seats, "L" + std::to_string(i - 3), customers_per_queue);
 		tids[i] = sellers[i]->getThread();
@@ -108,7 +108,7 @@ int main(int argc, char* argv[]) {
 
 	// free all of the sellers
 	for(int i=0; i<10; i++) {
-		free(sellers[i]);
+		delete sellers[i];
 	}
 
 	exit(0);

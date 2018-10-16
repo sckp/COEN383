@@ -2,17 +2,18 @@
 
 // static function to start threading from within the constructor
 static void* sell_x(void* object) {
-  return ((Seller*) object)->sell();
+	return ((Seller*) object)->sell();
 }
 
 Seller::Seller(std::string seats[][10], std::string seller_type, int queue_size) {
-  concert_seats = seats;
-  this->seller_type = seller_type;
-  // call function to populate the customer queue
-  fill_queue(queue_size);
+	concert_seats = seats;
+	this->seller_type = seller_type;
+	remaining_customer_service_time = 0;
+	// call function to populate the customer queue
+	fill_queue(queue_size);
 
-  // pass pthread_create "this" to call a member function in sell_x
-  pthread_create(&my_thread, NULL, sell_x, (void*) this);
+	// pass pthread_create "this" to call a member function in sell_x
+	pthread_create(&my_thread, NULL, sell_x, (void*) this);
 }
 
 
@@ -35,21 +36,7 @@ void* Seller::sell() {
 
     /*
       Do logic for dispencing tickets
-    int lowSale, highSale;
-    **increment current sale time need to find variable**
-    if (seller_type == "H") {
-    	lowSale = 1;
-	highSale = 2;
-    } else if (seller_type == "M") {
-    	lowSale = 2;
-	highSale = 4;
-    } else {
-    	lowSale = 7;
-	highSale = 4;
-    }
-    if (current sale time == highSale || (current sale time >= lowSale && rand()%2 == 0)) {
-
-    }
+    
     */
 
 
@@ -67,17 +54,17 @@ bool Seller::isEmpty() {
 
 // sets the seller type
 void Seller::setSellerType(std::string seller_type) {
-  this->seller_type = seller_type;
+	this->seller_type = seller_type;
 }
 
 // add a customer to the seller's queue
 void Seller::push_queue(Customer c) {
-  this->q.push(c);
+	q.push(c);
 }
 
 // remove a customer from the sellers queue
 void Seller::pop_queue() {
-  this->q.pop();
+	q.pop();
 }
 
 // function to return the thread

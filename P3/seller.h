@@ -16,12 +16,16 @@ extern int max_time;
 
 class Seller {
 	private:
+		// seller type
 		std::string seller_type;
+		// sellers customer queue
 		std::priority_queue<Customer> q;
 		// reference to customer seats
 		std::string (*concert_seats)[10];
 		// reference to thread
 		pthread_t my_thread;
+		// remaining customer service time
+		int remaining_customer_service_time;
 
 	public:
 		// constructor

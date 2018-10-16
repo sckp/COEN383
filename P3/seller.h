@@ -15,19 +15,25 @@ extern int max_time;
 
 
 class Seller {
-  char seller_type;
-  std::priority_queue<Customer> q;
-  // reference to customer seats
-  std::string (*concert_seats)[10];
-  // reference to thread
-  pthread_t my_thread;
+	private:
+		std::string seller_type;
+		std::priority_queue<Customer> q;
+		// reference to customer seats
+		std::string (*concert_seats)[10];
+		// reference to thread
+		pthread_t my_thread;
 
-public:
-  Seller(std::string seats[][10], char seller_type);
-  void setSellerType(char seller_type);
-  void sell();
-  void push_queue(Customer c);
-  bool isEmpty();
-  pthread_t getThread();
-  Customer pop_queue();
+	public:
+		// constructor
+		Seller(std::string seats[][10], std::string seller_type, int queue_size);
+		void setSellerType(std::string seller_type);
+		void sell();
+		void push_queue(Customer c);
+		bool isEmpty();
+		pthread_t getThread();
+		Customer pop_queue();
+		// function to get random service time
+		int get_service_time();
+		// function to fill the sellers queue
+		void fill_queue(int n);
 };

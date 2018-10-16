@@ -60,26 +60,27 @@ void* Seller::sell() {
   return NULL;
 }
 
+// checks if the seller queue is empty
 bool Seller::isEmpty() {
-  if(this->q.empty() == true) {
-    return true;
-  } else {
-    return false;
-  }
+	return q.empty();
 }
 
+// sets the seller type
 void Seller::setSellerType(std::string seller_type) {
   this->seller_type = seller_type;
 }
 
+// add a customer to the seller's queue
 void Seller::push_queue(Customer c) {
   this->q.push(c);
 }
 
-Customer Seller::pop_queue() {
+// remove a customer from the sellers queue
+void Seller::pop_queue() {
   this->q.pop();
 }
 
+// function to return the thread
 pthread_t Seller::getThread() {
   return my_thread;
 }

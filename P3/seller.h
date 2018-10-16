@@ -26,12 +26,17 @@ class Seller {
 	public:
 		// constructor
 		Seller(std::string seats[][10], std::string seller_type, int queue_size);
+		// sets the seller type
 		void setSellerType(std::string seller_type);
 		void* sell();
+		// add a customer to the seller's queue
 		void push_queue(Customer c);
+		// checks if the seller queue is empty
 		bool isEmpty();
+		// function to return the thread
 		pthread_t getThread();
-		Customer pop_queue();
+		// remove a customer from the sellers queue
+		void pop_queue();
 		// function to get random service time
 		int get_service_time();
 		// function to fill the sellers queue

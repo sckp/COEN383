@@ -2,8 +2,7 @@
 
 // static function to start threading from within the constructor
 static void* sell_x(void* object) {
-  ((Seller*) object)->sell();
-  return NULL;
+  return ((Seller*) object)->sell();
 }
 
 Seller::Seller(std::string seats[][10], std::string seller_type, int queue_size) {
@@ -11,13 +10,13 @@ Seller::Seller(std::string seats[][10], std::string seller_type, int queue_size)
   this->seller_type = seller_type;
   // call function to populate the customer queue
   fill_queue(queue_size);
-  
+
   // pass pthread_create "this" to call a member function in sell_x
   pthread_create(&my_thread, NULL, sell_x, (void*) this);
 }
 
 
-void Seller::sell() {
+void* Seller::sell() {
 	pthread_mutex_lock(&mutex_condition);
 	pthread_cond_wait(&cond_go, &mutex_condition);
 	pthread_mutex_unlock(&mutex_condition);
@@ -27,12 +26,12 @@ void Seller::sell() {
 		}
 		pthread_mutex_lock(&mutex_sell);
     pthread_mutex_lock(&print_lock);
-    // std::cout << std::endl;
-    // std::cout << clock_time << std::endl;
-    // std::cout << q.top().arrival_time << std::endl;
-    // std::cout << q.top().ID << std::endl;
-    // std::cout << seller_type << std::endl;
-    // std::cout << std::endl;
+    std::cout << std::endl;
+    std::cout << clock_time << std::endl;
+    std::cout << q.top().arrival_time << std::endl;
+    std::cout << q.top().ID << std::endl;
+    std::cout << seller_type << std::endl;
+    std::cout << std::endl;
 
     /*
       Do logic for dispencing tickets
@@ -49,7 +48,7 @@ void Seller::sell() {
 	highSale = 4;
     }
     if (current sale time == highSale || (current sale time >= lowSale && rand()%2 == 0)) {
-    	
+
     }
     */
 
@@ -58,6 +57,7 @@ void Seller::sell() {
     q.pop();
 		pthread_mutex_unlock(&mutex_sell);
 	}
+  return NULL;
 }
 
 bool Seller::isEmpty() {
@@ -108,7 +108,3 @@ void Seller::fill_queue(int n) {
 		q.push(c);
 	}
 }
-
-
-
-

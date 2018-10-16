@@ -27,7 +27,7 @@ class Seller {
 		// constructor
 		Seller(std::string seats[][10], std::string seller_type, int queue_size);
 		void setSellerType(std::string seller_type);
-		void sell();
+		void* sell();
 		void push_queue(Customer c);
 		bool isEmpty();
 		pthread_t getThread();

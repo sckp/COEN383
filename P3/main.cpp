@@ -86,7 +86,6 @@ int main(int argc, char* argv[]) {
 	}
 
 	for(int i = 4; i < 10; i++) {
-		
 		sellers[i] = new Seller(concert_seats, "L" + std::to_string(i - 3), customers_per_queue);
 		tids[i] = sellers[i]->getThread();
 	}

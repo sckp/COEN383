@@ -15,6 +15,9 @@ extern pthread_mutex_t print_lock;
 extern volatile int clock_time;
 extern int max_time;
 
+// create a variable to tell when all the tickets have been sold
+extern volatile int tickets_available;
+extern pthread_mutex_t tickets_available_mutex;
 
 class Seller {
 	private:

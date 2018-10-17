@@ -32,6 +32,10 @@ pthread_mutex_t print_lock = PTHREAD_MUTEX_INITIALIZER;
 volatile int clock_time;
 int max_time = 60;
 
+// create a variable to tell when all the tickets have been sold
+volatile int tickets_available;
+pthread_mutex_t tickets_available_mutex = PTHREAD_MUTEX_INITIALIZER;
+
 
 void wakeup_all_seller_threads() {
 	pthread_mutex_lock(&mutex_condition);
@@ -46,6 +50,8 @@ int main(int argc, char* argv[]) {
 	srand(seed);
 	// initialize the clock time to 0
 	clock_time = 0;
+	// initialize the available number of tickets to 100
+	tickets_available = 100;
 
 	// set a default value for the number of customers per queue
 	int customers_per_queue = 10;

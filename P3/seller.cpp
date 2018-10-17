@@ -32,11 +32,25 @@ void* Seller::sell() {
 			// get the random service time required for the customer
 			int serve_time = get_service_time();
 			
+			// find out if any tickets are still available
+			int tickets_remain;
+			pthread_mutex_lock(&tickets_available_mutex);
+			tickets_remain = tickets_available;
+			pthread_mutex_unlock(&tickets_available_mutex);
+			
 			pthread_mutex_lock(&mutex_sell);
 			pthread_mutex_lock(&print_lock);
 			
-			
-			print_purchase((clock_time + serve_time), &c);
+			if(0 < tickets_remain) {
+				print_purchase((clock_time + serve_time), &c, this->seller_type.c_str());
+				// decrement the number of remaining tickets
+				pthread_mutex_lock(&tickets_available_mutex);
+				tickets_available--;
+				pthread_mutex_unlock(&tickets_available_mutex);
+			}
+			else {
+				print_soldout(clock_time, &c);
+			}
 			
 			
 			

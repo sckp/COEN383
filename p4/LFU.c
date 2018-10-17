@@ -1,8 +1,8 @@
 #include "page.h"
 
-void LFU (list * page_list) {
-  page* temp = page_list ->head;
-  page* evict = temp;
+void LFU (List * page_list) {
+  Page* temp = page_list ->head;
+  Page* evict = temp;
   int least = temp->LFU_count;
   
   while(temp) {

@@ -6,6 +6,8 @@
 #include <pthread.h>
 
 #include "customer.h"
+#include "helper.h"
+
 extern pthread_cond_t cond_go;
 extern pthread_mutex_t mutex_condition;
 extern pthread_mutex_t mutex_sell;

@@ -5,6 +5,7 @@ static void* sell_x(void* object) {
 	return ((Seller*) object)->sell();
 }
 
+// 3 argument constructor
 Seller::Seller(std::string seats[][10], std::string seller_type, int queue_size) {
 	concert_seats = seats;
 	this->seller_type = seller_type;
@@ -21,30 +22,29 @@ void* Seller::sell() {
 	pthread_mutex_lock(&mutex_condition);
 	pthread_cond_wait(&cond_go, &mutex_condition);
 	pthread_mutex_unlock(&mutex_condition);
-	while(!isEmpty() && clock_time < max_time) {
-    while(clock_time < q.top().arrival_time) {
-
+	while(clock_time < max_time) {
+		// check if it is time to serve the next customer and that the queue is not empty
+		if((clock_time >= q.top().arrival_time) && (!this->isEmpty())) {
+			// get the customer from the queue
+			Customer c = this->q.top();
+			// pop the customer from the queue
+			this->q.pop();
+			// get the random service time required for the customer
+			int serve_time = get_service_time();
+			
+			pthread_mutex_lock(&mutex_sell);
+			pthread_mutex_lock(&print_lock);
+			
+			
+			print_purchase((clock_time + serve_time), &c);
+			
+			
+			
+			pthread_mutex_unlock(&print_lock);
+			pthread_mutex_unlock(&mutex_sell);
 		}
-		pthread_mutex_lock(&mutex_sell);
-    pthread_mutex_lock(&print_lock);
-    std::cout << std::endl;
-    std::cout << clock_time << std::endl;
-    std::cout << q.top().arrival_time << std::endl;
-    std::cout << q.top().ID << std::endl;
-    std::cout << seller_type << std::endl;
-    std::cout << std::endl;
-
-    /*
-      Do logic for dispencing tickets
-    
-    */
-
-
-    pthread_mutex_unlock(&print_lock);
-    q.pop();
-		pthread_mutex_unlock(&mutex_sell);
 	}
-  return NULL;
+	return NULL;
 }
 
 // checks if the seller queue is empty

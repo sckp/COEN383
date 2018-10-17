@@ -1,8 +1,8 @@
 #include "page.h"
 
-void LRU (list * page_list) {
-  page* temp = page_list->head;
-  page* evict = temp;
+void LRU (List * page_list) {
+  Page* temp = page_list->head;
+  Page* evict = temp;
   
   int lru_time = temp->last_timestamp;
   

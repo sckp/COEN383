@@ -20,16 +20,11 @@ extern volatile int tickets_available;
 extern pthread_mutex_t tickets_available_mutex;
 extern volatile int rowH;
 extern volatile int seatH;
-extern pthread_mutex_t rowH_mutex;
-extern pthread_mutex_t seatH_mutex;
 extern volatile int rowM;
 extern volatile int seatM;
-extern pthread_mutex_t rowM_mutex;
-extern pthread_mutex_t seatM_mutex;
 extern volatile int rowL;
 extern volatile int seatL;
-extern pthread_mutex_t rowL_mutex;
-extern pthread_mutex_t seatL_mutex;
+extern pthread_mutex_t seating_index_mutex;
 
 class Seller {
 	private:
@@ -62,5 +57,10 @@ class Seller {
 		int get_service_time();
 		// function to fill the sellers queue
 		void fill_queue(int n);
+		// get the current row for seating
+		int get_row();
+		// get the current seat to be used
+		int get_seat();
+		// set the next free seat
 		void set_next_free_seat();
 };

@@ -36,21 +36,14 @@ int max_time = 60;
 volatile int tickets_available;
 pthread_mutex_t tickets_available_mutex = PTHREAD_MUTEX_INITIALIZER;
 
-// create mutexes for the H seller rows and seller seats
+// create variables and a mutex for the seller rows and seller seats
 volatile int rowH;
 volatile int seatH;
-pthread_mutex_t rowH_mutex = PTHREAD_MUTEX_INITIALIZER;
-pthread_mutex_t seatH_mutex = PTHREAD_MUTEX_INITIALIZER;
-// create mutexes for the M seller rows and seller seats
 volatile int rowM;
 volatile int seatM;
-pthread_mutex_t rowM_mutex = PTHREAD_MUTEX_INITIALIZER;
-pthread_mutex_t seatM_mutex = PTHREAD_MUTEX_INITIALIZER;
-// create mutexes for the L seller rows and seller seats
 volatile int rowL;
 volatile int seatL;
-pthread_mutex_t rowL_mutex = PTHREAD_MUTEX_INITIALIZER;
-pthread_mutex_t seatL_mutex = PTHREAD_MUTEX_INITIALIZER;
+pthread_mutex_t seating_index_mutex = PTHREAD_MUTEX_INITIALIZER;
 
 // function to wake up all of the seller threads
 void wakeup_all_seller_threads() {

@@ -36,7 +36,23 @@ int max_time = 60;
 volatile int tickets_available;
 pthread_mutex_t tickets_available_mutex = PTHREAD_MUTEX_INITIALIZER;
 
+// create mutexes for the H seller rows and seller seats
+volatile int rowH;
+volatile int seatH;
+pthread_mutex_t rowH_mutex = PTHREAD_MUTEX_INITIALIZER;
+pthread_mutex_t seatH_mutex = PTHREAD_MUTEX_INITIALIZER;
+// create mutexes for the M seller rows and seller seats
+volatile int rowM;
+volatile int seatM;
+pthread_mutex_t rowM_mutex = PTHREAD_MUTEX_INITIALIZER;
+pthread_mutex_t seatM_mutex = PTHREAD_MUTEX_INITIALIZER;
+// create mutexes for the L seller rows and seller seats
+volatile int rowL;
+volatile int seatL;
+pthread_mutex_t rowL_mutex = PTHREAD_MUTEX_INITIALIZER;
+pthread_mutex_t seatL_mutex = PTHREAD_MUTEX_INITIALIZER;
 
+// function to wake up all of the seller threads
 void wakeup_all_seller_threads() {
 	pthread_mutex_lock(&mutex_condition);
 	pthread_cond_broadcast(&cond_go);
@@ -52,6 +68,13 @@ int main(int argc, char* argv[]) {
 	clock_time = 0;
 	// initialize the available number of tickets to 100
 	tickets_available = 100;
+	// initialize all of the starting rows and seats
+	rowH = 0;
+	seatH = 0;
+	rowM = 5;
+	seatM = 0;
+	rowL = 9;
+	seatL = 0;
 
 	// set a default value for the number of customers per queue
 	int customers_per_queue = 10;

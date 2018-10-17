@@ -18,6 +18,18 @@ extern int max_time;
 // create a variable to tell when all the tickets have been sold
 extern volatile int tickets_available;
 extern pthread_mutex_t tickets_available_mutex;
+extern volatile int rowH;
+extern volatile int seatH;
+extern pthread_mutex_t rowH_mutex;
+extern pthread_mutex_t seatH_mutex;
+extern volatile int rowM;
+extern volatile int seatM;
+extern pthread_mutex_t rowM_mutex;
+extern pthread_mutex_t seatM_mutex;
+extern volatile int rowL;
+extern volatile int seatL;
+extern pthread_mutex_t rowL_mutex;
+extern pthread_mutex_t seatL_mutex;
 
 class Seller {
 	private:
@@ -50,4 +62,5 @@ class Seller {
 		int get_service_time();
 		// function to fill the sellers queue
 		void fill_queue(int n);
+		void set_next_free_seat();
 };

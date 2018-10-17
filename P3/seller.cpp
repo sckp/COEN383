@@ -32,28 +32,23 @@ void* Seller::sell() {
 			// get the random service time required for the customer
 			int serve_time = get_service_time();
 			
-			// find out if any tickets are still available
-			int tickets_remain;
-			pthread_mutex_lock(&tickets_available_mutex);
-			tickets_remain = tickets_available;
-			pthread_mutex_unlock(&tickets_available_mutex);
-			
+			// get mutexes to enter critical region
 			pthread_mutex_lock(&mutex_sell);
 			pthread_mutex_lock(&print_lock);
-			
-			if(0 < tickets_remain) {
+			pthread_mutex_lock(&tickets_available_mutex);
+			// check if there are any available tickets left
+			if(0 < tickets_available) {
 				print_purchase((clock_time + serve_time), &c, this->seller_type.c_str());
+				// print the seating chart
+				print_seats(concert_seats);
 				// decrement the number of remaining tickets
-				pthread_mutex_lock(&tickets_available_mutex);
 				tickets_available--;
-				pthread_mutex_unlock(&tickets_available_mutex);
 			}
 			else {
 				print_soldout(clock_time, &c);
 			}
-			
-			
-			
+			// release mutexes
+			pthread_mutex_unlock(&tickets_available_mutex);
 			pthread_mutex_unlock(&print_lock);
 			pthread_mutex_unlock(&mutex_sell);
 		}
@@ -109,4 +104,60 @@ void Seller::fill_queue(int n) {
 		generate_customer(&c, i);
 		q.push(c);
 	}
+}
+
+// function that sets the next free seat
+void Seller::set_next_free_seat() {
+	// check if this is a H ticket seller
+	if('H' == this->seller_type[0]) {
+		// lock the H row
+		pthread_mutex_lock(&rowH_mutex);
+		// lock the H seat
+		pthread_mutex_lock(&seatH_mutex);
+		// increment the seat
+		seatH++;
+		// check if the seat and row need to be adjusted
+		if(9 < seatH) {
+			rowH++;
+			seatH = 0;
+		}
+		// unlock the H row
+		pthread_mutex_unlock(&rowH_mutex);
+		// unlock the H seat
+		pthread_mutex_unlock(&seatH_mutex);
+		// return from the function
+		return;
+	}
+	// check if this is a M ticket seller
+	if('M' == this->seller_type[0]) {
+	/*	
+  int rowM;
+  int seatM;
+ pthread_mutex_t rowM_mutex;
+ pthread_mutex_t seatM_mutex;
+		*/
+		return;
+	}
+	// check if this is a L ticket seller
+	if('L' == this->seller_type[0]) {
+		// lock the H row
+		pthread_mutex_lock(&rowL_mutex);
+		// lock the H seat
+		pthread_mutex_lock(&seatL_mutex);
+		// increment the seat
+		seatL++;
+		// check if the seat and row need to be adjusted
+		if(9 < seatL) {
+			rowL--;
+			seatL = 0;
+		}
+		// unlock the H row
+		pthread_mutex_unlock(&rowL_mutex);
+		// unlock the H seat
+		pthread_mutex_unlock(&seatL_mutex);
+		// return from the function
+		return;
+	}
+	
+	
 }

@@ -26,6 +26,6 @@ void print_purchase(int clock_time, Customer* c, const char* s) {
 }
 
 // function to print that the concert is soldout and the customer is turned away
-void print_soldout(int clock_time, Customer* c) {
-	printf("0:%02i Customer %i has been turned away because concert is sold out.\n", clock_time, c->ID);
+void print_soldout(int clock_time, Customer* c, const char* s) {
+	printf("0:%02i Customer %i has been turned away by seller %s because concert is sold out.\n", clock_time, c->ID, s);
 }

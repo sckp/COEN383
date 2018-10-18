@@ -43,25 +43,46 @@ void* Seller::sell() {
 			if(0 < tickets_available) {
 				// customer is being serviced so set next available time
 				ready_for_customer = (clock_time + serve_time);
-				
-				// get the available row
-				int avail_row = get_row();
-				// get the available seat
-				int avail_seat = get_seat();
-				// set the next available seat
-				set_next_free_seat();
-				// print the purchase
-				print_purchase((clock_time + serve_time), &c, this->seller_type.c_str());
-				// print the seating chart
-				print_seats(concert_seats);
 				// decrement the number of remaining tickets
 				tickets_available--;
+				// variables to hold the row and seat indices
+				int avail_row;
+				int avail_seat;
+				// get the next available seat and make sure it isn't already taken
+				do {
+					// get the available row
+					avail_row = get_row();
+					// get the available seat
+					avail_seat = get_seat();
+					// set the next available seat if there are still tickets available
+					set_next_free_seat();
+					// put in an exit condition for the threads to prevent infinite loop looking for seat
+					if(('H' == this->seller_type[0]) && (9 < rowH)) {
+						break;
+					}
+					else if(('M' == this->seller_type[0]) && (0 > rowM)) {
+						break;
+					}
+					else if(('L' == this->seller_type[0]) && (0 > rowL)) {
+						break;
+					}
+					
+					
+				} while ("-" != concert_seats[avail_row][avail_seat]);
+				
+				// print the purchase
+				print_purchase((clock_time + serve_time), &c, this->seller_type.c_str());
 				// place the customer in the seat
 				concert_seats[avail_row][avail_seat] = (seller_type + "0" + std::to_string(c.ID));
+				// print the seating chart
+				print_seats(concert_seats);
+				// create a space for the output
+				printf("\n");
+				
 				
 			}
 			else {
-				print_soldout(clock_time, &c);
+				print_soldout(clock_time, &c, this->seller_type.c_str());
 			}
 			// release mutexes
 			pthread_mutex_unlock(&tickets_available_mutex);
@@ -166,7 +187,13 @@ void Seller::set_next_free_seat() {
 				rowM = 9;
 			}
 			else if(9 == rowM) {
+				rowM = 1;
+			}
+			else if(1 == rowM) {
 				rowM = 0;
+			}
+			else if(0 == rowM) {
+				rowM == -1;
 			}
 		}
 	}

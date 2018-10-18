@@ -6,9 +6,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-int clock;
-int *page_count_opts;
-
 enum job_state{
     RUNNING,
     WAITING,
@@ -32,7 +29,7 @@ typedef struct {
     enum job_state state;
 } Job;
 
-typedef struct{
+typedef struct Page{
     int pid;
     int page_num;
     struct Page* next;

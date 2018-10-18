@@ -11,7 +11,7 @@ int main(int argc, char* argv[]) {
     int misses = 0;
     
     //USED TO DETERMINE JOB SIZE AT INITIALIZATION
-    int *job_sizes = malloc(sizeof(int)*4);
+    int *job_sizes = (int*)malloc(sizeof(int)*4);
     job_sizes[0] = 5; //5 MB
     job_sizes[1] = 11; //11 MB
     job_sizes[2] = 17; //17 MB

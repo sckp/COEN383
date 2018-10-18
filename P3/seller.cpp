@@ -78,11 +78,21 @@ void* Seller::sell() {
 				print_seats(concert_seats);
 				// create a space for the output
 				printf("\n");
-				
-				
+				// increment the number of customers that got seats
+				if('H' == this->seller_type[0]) {
+					seated_customers_H++;
+				}
+				else if('M' == this->seller_type[0]) {
+					seated_customers_M++;
+				}
+				else if('L' == this->seller_type[0]) {
+					seated_customers_L++;
+				}
 			}
 			else {
 				print_soldout(clock_time, &c, this->seller_type.c_str());
+				// increment the number of customers turned away
+				turned_away_customers++;
 			}
 			// release mutexes
 			pthread_mutex_unlock(&tickets_available_mutex);

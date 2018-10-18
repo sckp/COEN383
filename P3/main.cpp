@@ -44,6 +44,10 @@ volatile int seatM;
 volatile int rowL;
 volatile int seatL;
 pthread_mutex_t seating_index_mutex = PTHREAD_MUTEX_INITIALIZER;
+volatile int seated_customers_H;
+volatile int seated_customers_M;
+volatile int seated_customers_L;
+volatile int turned_away_customers;
 
 // function to wake up all of the seller threads
 void wakeup_all_seller_threads() {
@@ -68,6 +72,10 @@ int main(int argc, char* argv[]) {
 	seatM = 0;
 	rowL = 9;
 	seatL = 0;
+	seated_customers_H = 0;
+	seated_customers_M = 0;
+	seated_customers_L = 0;
+	turned_away_customers = 0;
 
 	// set a default value for the number of customers per queue
 	int customers_per_queue = 10;
@@ -132,6 +140,11 @@ int main(int argc, char* argv[]) {
 	for(int i=0; i<10; i++) {
 		delete sellers[i];
 	}
-
+	
+	printf("There were %i H customers seated.\n", seated_customers_H);
+	printf("There were %i M customers seated.\n", seated_customers_M);
+	printf("There were %i L customers seated.\n", seated_customers_L);
+	printf("There were %i customers turned away.\n", turned_away_customers);
+	
 	exit(0);
 }

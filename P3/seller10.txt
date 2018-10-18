@@ -1,0 +1,1205 @@
+Each queue will have 10 customers.
+0:04 Customer 8 has purchased a ticket from seller M1 and left.
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+M108 - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+
+0:07 Customer 6 has purchased a ticket from seller L3 and left.
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+M108 - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+L306 - - - - - - - - - 
+
+0:06 Customer 3 has purchased a ticket from seller L6 and left.
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+M108 - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+L306 L603 - - - - - - - - 
+
+0:04 Customer 1 has purchased a ticket from seller H0 and left.
+H001 - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+M108 - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+L306 L603 - - - - - - - - 
+
+0:03 Customer 9 has purchased a ticket from seller H0 and left.
+H001 H009 - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+M108 - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+L306 L603 - - - - - - - - 
+
+0:05 Customer 1 has purchased a ticket from seller M1 and left.
+H001 H009 - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+M108 M101 - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+L306 L603 - - - - - - - - 
+
+0:10 Customer 7 has purchased a ticket from seller L2 and left.
+H001 H009 - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+M108 M101 - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+L306 L603 L207 - - - - - - - 
+
+0:06 Customer 7 has purchased a ticket from seller M2 and left.
+H001 H009 - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+M108 M101 M207 - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+L306 L603 L207 - - - - - - - 
+
+0:11 Customer 4 has purchased a ticket from seller L3 and left.
+H001 H009 - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+M108 M101 M207 - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+L306 L603 L207 L304 - - - - - - 
+
+0:12 Customer 6 has purchased a ticket from seller L5 and left.
+H001 H009 - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+M108 M101 M207 - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+L306 L603 L207 L304 L506 - - - - - 
+
+0:10 Customer 5 has purchased a ticket from seller M1 and left.
+H001 H009 - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+M108 M101 M207 M105 - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+L306 L603 L207 L304 L506 - - - - - 
+
+0:09 Customer 6 has purchased a ticket from seller M2 and left.
+H001 H009 - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+M108 M101 M207 M105 M206 - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+L306 L603 L207 L304 L506 - - - - - 
+
+0:09 Customer 4 has purchased a ticket from seller M2 and left.
+H001 H009 - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+M108 M101 M207 M105 M206 M204 - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+L306 L603 L207 L304 L506 - - - - - 
+
+0:11 Customer 8 has purchased a ticket from seller L4 and left.
+H001 H009 - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+M108 M101 M207 M105 M206 M204 - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+L306 L603 L207 L304 L506 L408 - - - - 
+
+0:08 Customer 2 has purchased a ticket from seller H0 and left.
+H001 H009 H002 - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+M108 M101 M207 M105 M206 M204 - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+L306 L603 L207 L304 L506 L408 - - - - 
+
+0:12 Customer 5 has purchased a ticket from seller M3 and left.
+H001 H009 H002 - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+M108 M101 M207 M105 M206 M204 M305 - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+L306 L603 L207 L304 L506 L408 - - - - 
+
+0:12 Customer 7 has purchased a ticket from seller M3 and left.
+H001 H009 H002 - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+M108 M101 M207 M105 M206 M204 M305 M307 - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+L306 L603 L207 L304 L506 L408 - - - - 
+
+0:14 Customer 7 has purchased a ticket from seller M1 and left.
+H001 H009 H002 - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+L306 L603 L207 L304 L506 L408 - - - - 
+
+0:15 Customer 3 has purchased a ticket from seller L4 and left.
+H001 H009 H002 - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+L306 L603 L207 L304 L506 L408 L403 - - - 
+
+0:16 Customer 0 has purchased a ticket from seller L1 and left.
+H001 H009 H002 - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+L306 L603 L207 L304 L506 L408 L403 L100 - - 
+
+0:15 Customer 8 has purchased a ticket from seller M2 and left.
+H001 H009 H002 - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+L306 L603 L207 L304 L506 L408 L403 L100 - - 
+
+0:18 Customer 4 has purchased a ticket from seller L5 and left.
+H001 H009 H002 - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 - 
+
+0:15 Customer 8 has purchased a ticket from seller H0 and left.
+H001 H009 H002 H008 - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 - 
+
+0:19 Customer 2 has purchased a ticket from seller L6 and left.
+H001 H009 H002 H008 - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:18 Customer 2 has purchased a ticket from seller L4 and left.
+H001 H009 H002 H008 - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+- - - - - - - - - - 
+- - - - - - - - - - 
+L402 - - - - - - - - - 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:20 Customer 2 has purchased a ticket from seller M2 and left.
+H001 H009 H002 H008 - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 - - - - - - - - - 
+- - - - - - - - - - 
+L402 - - - - - - - - - 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:21 Customer 4 has purchased a ticket from seller L1 and left.
+H001 H009 H002 H008 - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 - - - - - - - - - 
+- - - - - - - - - - 
+L402 L104 - - - - - - - - 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:21 Customer 2 has purchased a ticket from seller M1 and left.
+H001 H009 H002 H008 - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 - - - - - - - - 
+- - - - - - - - - - 
+L402 L104 - - - - - - - - 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:24 Customer 1 has purchased a ticket from seller L1 and left.
+H001 H009 H002 H008 - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 - - - - - - - - 
+- - - - - - - - - - 
+L402 L104 L101 - - - - - - - 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:24 Customer 5 has purchased a ticket from seller L6 and left.
+H001 H009 H002 H008 - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 - - - - - - - - 
+- - - - - - - - - - 
+L402 L104 L101 L605 - - - - - - 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:25 Customer 9 has purchased a ticket from seller L1 and left.
+H001 H009 H002 H008 - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 - - - - - - - - 
+- - - - - - - - - - 
+L402 L104 L101 L605 L109 - - - - - 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:23 Customer 6 has purchased a ticket from seller H0 and left.
+H001 H009 H002 H008 H006 - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 - - - - - - - - 
+- - - - - - - - - - 
+L402 L104 L101 L605 L109 - - - - - 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:27 Customer 3 has purchased a ticket from seller L1 and left.
+H001 H009 H002 H008 H006 - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 - - - - - - - - 
+- - - - - - - - - - 
+L402 L104 L101 L605 L109 L103 - - - - 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:27 Customer 7 has purchased a ticket from seller L4 and left.
+H001 H009 H002 H008 H006 - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 - - - - - - - - 
+- - - - - - - - - - 
+L402 L104 L101 L605 L109 L103 L407 - - - 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:25 Customer 0 has purchased a ticket from seller M1 and left.
+H001 H009 H002 H008 H006 - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 - - - - - - - 
+- - - - - - - - - - 
+L402 L104 L101 L605 L109 L103 L407 - - - 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:26 Customer 1 has purchased a ticket from seller L2 and left.
+H001 H009 H002 H008 H006 - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 - - - - - - - 
+- - - - - - - - - - 
+L402 L104 L101 L605 L109 L103 L407 L201 - - 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:26 Customer 9 has purchased a ticket from seller L4 and left.
+H001 H009 H002 H008 H006 - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 - - - - - - - 
+- - - - - - - - - - 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 - 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:28 Customer 5 has purchased a ticket from seller L4 and left.
+H001 H009 H002 H008 H006 - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 - - - - - - - 
+- - - - - - - - - - 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:27 Customer 2 has purchased a ticket from seller M3 and left.
+H001 H009 H002 H008 H006 - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 - - - - - - 
+- - - - - - - - - - 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:32 Customer 0 has purchased a ticket from seller L6 and left.
+H001 H009 H002 H008 H006 - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 - - - - - - 
+L600 - - - - - - - - - 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:33 Customer 5 has purchased a ticket from seller L3 and left.
+H001 H009 H002 H008 H006 - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 - - - - - - 
+L600 L305 - - - - - - - - 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:33 Customer 0 has purchased a ticket from seller L3 and left.
+H001 H009 H002 H008 H006 - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 - - - - - - 
+L600 L305 L300 - - - - - - - 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:29 Customer 1 has purchased a ticket from seller M2 and left.
+H001 H009 H002 H008 H006 - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 - - - - - 
+L600 L305 L300 - - - - - - - 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:31 Customer 1 has purchased a ticket from seller L3 and left.
+H001 H009 H002 H008 H006 - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 - - - - - 
+L600 L305 L300 L301 - - - - - - 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:35 Customer 0 has purchased a ticket from seller L4 and left.
+H001 H009 H002 H008 H006 - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 - - - - - 
+L600 L305 L300 L301 L400 - - - - - 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:34 Customer 6 has purchased a ticket from seller L1 and left.
+H001 H009 H002 H008 H006 - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 - - - - - 
+L600 L305 L300 L301 L400 L106 - - - - 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:34 Customer 0 has purchased a ticket from seller L2 and left.
+H001 H009 H002 H008 H006 - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 - - - - - 
+L600 L305 L300 L301 L400 L106 L200 - - - 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:34 Customer 6 has purchased a ticket from seller L6 and left.
+H001 H009 H002 H008 H006 - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 - - - - - 
+L600 L305 L300 L301 L400 L106 L200 L606 - - 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:36 Customer 3 has purchased a ticket from seller L5 and left.
+H001 H009 H002 H008 H006 - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 - - - - - 
+L600 L305 L300 L301 L400 L106 L200 L606 L503 - 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:36 Customer 8 has purchased a ticket from seller L5 and left.
+H001 H009 H002 H008 H006 - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 - - - - - 
+L600 L305 L300 L301 L400 L106 L200 L606 L503 L508 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:34 Customer 9 has purchased a ticket from seller M2 and left.
+H001 H009 H002 H008 H006 - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 M209 - - - - 
+L600 L305 L300 L301 L400 L106 L200 L606 L503 L508 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:38 Customer 7 has purchased a ticket from seller L6 and left.
+H001 H009 H002 H008 H006 - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 M209 L607 - - - 
+L600 L305 L300 L301 L400 L106 L200 L606 L503 L508 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:37 Customer 6 has purchased a ticket from seller M1 and left.
+H001 H009 H002 H008 H006 - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 M209 L607 M106 - - 
+L600 L305 L300 L301 L400 L106 L200 L606 L503 L508 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:38 Customer 6 has purchased a ticket from seller L2 and left.
+H001 H009 H002 H008 H006 - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 M209 L607 M106 L206 - 
+L600 L305 L300 L301 L400 L106 L200 L606 L503 L508 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:41 Customer 5 has purchased a ticket from seller L1 and left.
+H001 H009 H002 H008 H006 - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 M209 L607 M106 L206 L105 
+L600 L305 L300 L301 L400 L106 L200 L606 L503 L508 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:39 Customer 5 has purchased a ticket from seller L5 and left.
+H001 H009 H002 H008 H006 - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+L505 - - - - - - - - - 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 M209 L607 M106 L206 L105 
+L600 L305 L300 L301 L400 L106 L200 L606 L503 L508 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:37 Customer 3 has purchased a ticket from seller M2 and left.
+H001 H009 H002 H008 H006 - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+L505 M203 - - - - - - - - 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 M209 L607 M106 L206 L105 
+L600 L305 L300 L301 L400 L106 L200 L606 L503 L508 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:39 Customer 1 has purchased a ticket from seller L5 and left.
+H001 H009 H002 H008 H006 - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+L505 M203 L501 - - - - - - - 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 M209 L607 M106 L206 L105 
+L600 L305 L300 L301 L400 L106 L200 L606 L503 L508 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:39 Customer 6 has purchased a ticket from seller M3 and left.
+H001 H009 H002 H008 H006 - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+L505 M203 L501 M306 - - - - - - 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 M209 L607 M106 L206 L105 
+L600 L305 L300 L301 L400 L106 L200 L606 L503 L508 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:43 Customer 8 has purchased a ticket from seller L3 and left.
+H001 H009 H002 H008 H006 - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+L505 M203 L501 M306 L308 - - - - - 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 M209 L607 M106 L206 L105 
+L600 L305 L300 L301 L400 L106 L200 L606 L503 L508 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:43 Customer 2 has purchased a ticket from seller L5 and left.
+H001 H009 H002 H008 H006 - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+L505 M203 L501 M306 L308 L502 - - - - 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 M209 L607 M106 L206 L105 
+L600 L305 L300 L301 L400 L106 L200 L606 L503 L508 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:45 Customer 6 has purchased a ticket from seller L4 and left.
+H001 H009 H002 H008 H006 - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+L505 M203 L501 M306 L308 L502 L406 - - - 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 M209 L607 M106 L206 L105 
+L600 L305 L300 L301 L400 L106 L200 L606 L503 L508 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:40 Customer 0 has purchased a ticket from seller M3 and left.
+H001 H009 H002 H008 H006 - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+L505 M203 L501 M306 L308 L502 L406 M300 - - 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 M209 L607 M106 L206 L105 
+L600 L305 L300 L301 L400 L106 L200 L606 L503 L508 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:44 Customer 1 has purchased a ticket from seller L4 and left.
+H001 H009 H002 H008 H006 - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+L505 M203 L501 M306 L308 L502 L406 M300 L401 - 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 M209 L607 M106 L206 L105 
+L600 L305 L300 L301 L400 L106 L200 L606 L503 L508 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:45 Customer 4 has purchased a ticket from seller L6 and left.
+H001 H009 H002 H008 H006 - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+L505 M203 L501 M306 L308 L502 L406 M300 L401 L604 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 M209 L607 M106 L206 L105 
+L600 L305 L300 L301 L400 L106 L200 L606 L503 L508 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:44 Customer 7 has purchased a ticket from seller L3 and left.
+H001 H009 H002 H008 H006 - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+L307 - - - - - - - - - 
+L505 M203 L501 M306 L308 L502 L406 M300 L401 L604 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 M209 L607 M106 L206 L105 
+L600 L305 L300 L301 L400 L106 L200 L606 L503 L508 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:45 Customer 0 has purchased a ticket from seller L5 and left.
+H001 H009 H002 H008 H006 - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+L307 L500 - - - - - - - - 
+L505 M203 L501 M306 L308 L502 L406 M300 L401 L604 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 M209 L607 M106 L206 L105 
+L600 L305 L300 L301 L400 L106 L200 L606 L503 L508 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:49 Customer 8 has purchased a ticket from seller L1 and left.
+H001 H009 H002 H008 H006 - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+L307 L500 L108 - - - - - - - 
+L505 M203 L501 M306 L308 L502 L406 M300 L401 L604 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 M209 L607 M106 L206 L105 
+L600 L305 L300 L301 L400 L106 L200 L606 L503 L508 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:46 Customer 9 has purchased a ticket from seller M1 and left.
+H001 H009 H002 H008 H006 - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+L307 L500 L108 M109 - - - - - - 
+L505 M203 L501 M306 L308 L502 L406 M300 L401 L604 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 M209 L607 M106 L206 L105 
+L600 L305 L300 L301 L400 L106 L200 L606 L503 L508 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:49 Customer 5 has purchased a ticket from seller L2 and left.
+H001 H009 H002 H008 H006 - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+L307 L500 L108 M109 L205 - - - - - 
+L505 M203 L501 M306 L308 L502 L406 M300 L401 L604 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 M209 L607 M106 L206 L105 
+L600 L305 L300 L301 L400 L106 L200 L606 L503 L508 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:50 Customer 3 has purchased a ticket from seller L2 and left.
+H001 H009 H002 H008 H006 - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+L307 L500 L108 M109 L205 L203 - - - - 
+L505 M203 L501 M306 L308 L502 L406 M300 L401 L604 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 M209 L607 M106 L206 L105 
+L600 L305 L300 L301 L400 L106 L200 L606 L503 L508 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:50 Customer 2 has purchased a ticket from seller L3 and left.
+H001 H009 H002 H008 H006 - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+L307 L500 L108 M109 L205 L203 L302 - - - 
+L505 M203 L501 M306 L308 L502 L406 M300 L401 L604 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 M209 L607 M106 L206 L105 
+L600 L305 L300 L301 L400 L106 L200 L606 L503 L508 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:49 Customer 3 has purchased a ticket from seller M3 and left.
+H001 H009 H002 H008 H006 - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+L307 L500 L108 M109 L205 L203 L302 M303 - - 
+L505 M203 L501 M306 L308 L502 L406 M300 L401 L604 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 M209 L607 M106 L206 L105 
+L600 L305 L300 L301 L400 L106 L200 L606 L503 L508 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:48 Customer 0 has purchased a ticket from seller M2 and left.
+H001 H009 H002 H008 H006 - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+L307 L500 L108 M109 L205 L203 L302 M303 M200 - 
+L505 M203 L501 M306 L308 L502 L406 M300 L401 L604 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 M209 L607 M106 L206 L105 
+L600 L305 L300 L301 L400 L106 L200 L606 L503 L508 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:52 Customer 9 has purchased a ticket from seller L2 and left.
+H001 H009 H002 H008 H006 - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+L307 L500 L108 M109 L205 L203 L302 M303 M200 L209 
+L505 M203 L501 M306 L308 L502 L406 M300 L401 L604 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 M209 L607 M106 L206 L105 
+L600 L305 L300 L301 L400 L106 L200 L606 L503 L508 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:54 Customer 7 has purchased a ticket from seller L5 and left.
+H001 H009 H002 H008 H006 - - - - - 
+- - - - - - - - - - 
+L507 - - - - - - - - - 
+L307 L500 L108 M109 L205 L203 L302 M303 M200 L209 
+L505 M203 L501 M306 L308 L502 L406 M300 L401 L604 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 M209 L607 M106 L206 L105 
+L600 L305 L300 L301 L400 L106 L200 L606 L503 L508 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:51 Customer 2 has purchased a ticket from seller L2 and left.
+H001 H009 H002 H008 H006 - - - - - 
+- - - - - - - - - - 
+L507 L202 - - - - - - - - 
+L307 L500 L108 M109 L205 L203 L302 M303 M200 L209 
+L505 M203 L501 M306 L308 L502 L406 M300 L401 L604 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 M209 L607 M106 L206 L105 
+L600 L305 L300 L301 L400 L106 L200 L606 L503 L508 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:49 Customer 7 has purchased a ticket from seller H0 and left.
+H001 H009 H002 H008 H006 H007 - - - - 
+- - - - - - - - - - 
+L507 L202 - - - - - - - - 
+L307 L500 L108 M109 L205 L203 L302 M303 M200 L209 
+L505 M203 L501 M306 L308 L502 L406 M300 L401 L604 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 M209 L607 M106 L206 L105 
+L600 L305 L300 L301 L400 L106 L200 L606 L503 L508 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:50 Customer 9 has purchased a ticket from seller M3 and left.
+H001 H009 H002 H008 H006 H007 - - - - 
+- - - - - - - - - - 
+L507 L202 M309 - - - - - - - 
+L307 L500 L108 M109 L205 L203 L302 M303 M200 L209 
+L505 M203 L501 M306 L308 L502 L406 M300 L401 L604 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 M209 L607 M106 L206 L105 
+L600 L305 L300 L301 L400 L106 L200 L606 L503 L508 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:55 Customer 1 has purchased a ticket from seller L6 and left.
+H001 H009 H002 H008 H006 H007 - - - - 
+- - - - - - - - - - 
+L507 L202 M309 L601 - - - - - - 
+L307 L500 L108 M109 L205 L203 L302 M303 M200 L209 
+L505 M203 L501 M306 L308 L502 L406 M300 L401 L604 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 M209 L607 M106 L206 L105 
+L600 L305 L300 L301 L400 L106 L200 L606 L503 L508 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:54 Customer 8 has purchased a ticket from seller L2 and left.
+H001 H009 H002 H008 H006 H007 - - - - 
+- - - - - - - - - - 
+L507 L202 M309 L601 L208 - - - - - 
+L307 L500 L108 M109 L205 L203 L302 M303 M200 L209 
+L505 M203 L501 M306 L308 L502 L406 M300 L401 L604 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 M209 L607 M106 L206 L105 
+L600 L305 L300 L301 L400 L106 L200 L606 L503 L508 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:53 Customer 4 has purchased a ticket from seller M3 and left.
+H001 H009 H002 H008 H006 H007 - - - - 
+- - - - - - - - - - 
+L507 L202 M309 L601 L208 M304 - - - - 
+L307 L500 L108 M109 L205 L203 L302 M303 M200 L209 
+L505 M203 L501 M306 L308 L502 L406 M300 L401 L604 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 M209 L607 M106 L206 L105 
+L600 L305 L300 L301 L400 L106 L200 L606 L503 L508 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:52 Customer 3 has purchased a ticket from seller H0 and left.
+H001 H009 H002 H008 H006 H007 H003 - - - 
+- - - - - - - - - - 
+L507 L202 M309 L601 L208 M304 - - - - 
+L307 L500 L108 M109 L205 L203 L302 M303 M200 L209 
+L505 M203 L501 M306 L308 L502 L406 M300 L401 L604 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 M209 L607 M106 L206 L105 
+L600 L305 L300 L301 L400 L106 L200 L606 L503 L508 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:52 Customer 4 has purchased a ticket from seller H0 and left.
+H001 H009 H002 H008 H006 H007 H003 H004 - - 
+- - - - - - - - - - 
+L507 L202 M309 L601 L208 M304 - - - - 
+L307 L500 L108 M109 L205 L203 L302 M303 M200 L209 
+L505 M203 L501 M306 L308 L502 L406 M300 L401 L604 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 M209 L607 M106 L206 L105 
+L600 L305 L300 L301 L400 L106 L200 L606 L503 L508 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:58 Customer 7 has purchased a ticket from seller L1 and left.
+H001 H009 H002 H008 H006 H007 H003 H004 - - 
+- - - - - - - - - - 
+L507 L202 M309 L601 L208 M304 L107 - - - 
+L307 L500 L108 M109 L205 L203 L302 M303 M200 L209 
+L505 M203 L501 M306 L308 L502 L406 M300 L401 L604 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 M209 L607 M106 L206 L105 
+L600 L305 L300 L301 L400 L106 L200 L606 L503 L508 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:56 Customer 2 has purchased a ticket from seller L1 and left.
+H001 H009 H002 H008 H006 H007 H003 H004 - - 
+- - - - - - - - - - 
+L507 L202 M309 L601 L208 M304 L107 L102 - - 
+L307 L500 L108 M109 L205 L203 L302 M303 M200 L209 
+L505 M203 L501 M306 L308 L502 L406 M300 L401 L604 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 M209 L607 M106 L206 L105 
+L600 L305 L300 L301 L400 L106 L200 L606 L503 L508 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:55 Customer 4 has purchased a ticket from seller M1 and left.
+H001 H009 H002 H008 H006 H007 H003 H004 - - 
+- - - - - - - - - - 
+L507 L202 M309 L601 L208 M304 L107 L102 M104 - 
+L307 L500 L108 M109 L205 L203 L302 M303 M200 L209 
+L505 M203 L501 M306 L308 L502 L406 M300 L401 L604 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 M209 L607 M106 L206 L105 
+L600 L305 L300 L301 L400 L106 L200 L606 L503 L508 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:56 Customer 3 has purchased a ticket from seller L3 and left.
+H001 H009 H002 H008 H006 H007 H003 H004 - - 
+- - - - - - - - - - 
+L507 L202 M309 L601 L208 M304 L107 L102 M104 L303 
+L307 L500 L108 M109 L205 L203 L302 M303 M200 L209 
+L505 M203 L501 M306 L308 L502 L406 M300 L401 L604 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 M209 L607 M106 L206 L105 
+L600 L305 L300 L301 L400 L106 L200 L606 L503 L508 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:58 Customer 4 has purchased a ticket from seller L4 and left.
+H001 H009 H002 H008 H006 H007 H003 H004 - - 
+L404 - - - - - - - - - 
+L507 L202 M309 L601 L208 M304 L107 L102 M104 L303 
+L307 L500 L108 M109 L205 L203 L302 M303 M200 L209 
+L505 M203 L501 M306 L308 L502 L406 M300 L401 L604 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 M209 L607 M106 L206 L105 
+L600 L305 L300 L301 L400 L106 L200 L606 L503 L508 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:55 Customer 0 has purchased a ticket from seller H0 and left.
+H001 H009 H002 H008 H006 H007 H003 H004 H000 - 
+L404 - - - - - - - - - 
+L507 L202 M309 L601 L208 M304 L107 L102 M104 L303 
+L307 L500 L108 M109 L205 L203 L302 M303 M200 L209 
+L505 M203 L501 M306 L308 L502 L406 M300 L401 L604 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 M209 L607 M106 L206 L105 
+L600 L305 L300 L301 L400 L106 L200 L606 L503 L508 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:62 Customer 9 has purchased a ticket from seller L5 and left.
+H001 H009 H002 H008 H006 H007 H003 H004 H000 - 
+L404 L509 - - - - - - - - 
+L507 L202 M309 L601 L208 M304 L107 L102 M104 L303 
+L307 L500 L108 M109 L205 L203 L302 M303 M200 L209 
+L505 M203 L501 M306 L308 L502 L406 M300 L401 L604 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 M209 L607 M106 L206 L105 
+L600 L305 L300 L301 L400 L106 L200 L606 L503 L508 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:60 Customer 9 has purchased a ticket from seller L6 and left.
+H001 H009 H002 H008 H006 H007 H003 H004 H000 - 
+L404 L509 L609 - - - - - - - 
+L507 L202 M309 L601 L208 M304 L107 L102 M104 L303 
+L307 L500 L108 M109 L205 L203 L302 M303 M200 L209 
+L505 M203 L501 M306 L308 L502 L406 M300 L401 L604 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 M209 L607 M106 L206 L105 
+L600 L305 L300 L301 L400 L106 L200 L606 L503 L508 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:61 Customer 9 has purchased a ticket from seller L3 and left.
+H001 H009 H002 H008 H006 H007 H003 H004 H000 - 
+L404 L509 L609 L309 - - - - - - 
+L507 L202 M309 L601 L208 M304 L107 L102 M104 L303 
+L307 L500 L108 M109 L205 L203 L302 M303 M200 L209 
+L505 M203 L501 M306 L308 L502 L406 M300 L401 L604 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 M209 L607 M106 L206 L105 
+L600 L305 L300 L301 L400 L106 L200 L606 L503 L508 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:60 Customer 8 has purchased a ticket from seller M3 and left.
+H001 H009 H002 H008 H006 H007 H003 H004 H000 - 
+L404 L509 L609 L309 M308 - - - - - 
+L507 L202 M309 L601 L208 M304 L107 L102 M104 L303 
+L307 L500 L108 M109 L205 L203 L302 M303 M200 L209 
+L505 M203 L501 M306 L308 L502 L406 M300 L401 L604 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 M209 L607 M106 L206 L105 
+L600 L305 L300 L301 L400 L106 L200 L606 L503 L508 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:61 Customer 4 has purchased a ticket from seller L2 and left.
+H001 H009 H002 H008 H006 H007 H003 H004 H000 - 
+L404 L509 L609 L309 M308 L204 - - - - 
+L507 L202 M309 L601 L208 M304 L107 L102 M104 L303 
+L307 L500 L108 M109 L205 L203 L302 M303 M200 L209 
+L505 M203 L501 M306 L308 L502 L406 M300 L401 L604 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 M209 L607 M106 L206 L105 
+L600 L305 L300 L301 L400 L106 L200 L606 L503 L508 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:60 Customer 5 has purchased a ticket from seller M2 and left.
+H001 H009 H002 H008 H006 H007 H003 H004 H000 - 
+L404 L509 L609 L309 M308 L204 M205 - - - 
+L507 L202 M309 L601 L208 M304 L107 L102 M104 L303 
+L307 L500 L108 M109 L205 L203 L302 M303 M200 L209 
+L505 M203 L501 M306 L308 L502 L406 M300 L401 L604 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 M209 L607 M106 L206 L105 
+L600 L305 L300 L301 L400 L106 L200 L606 L503 L508 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:64 Customer 8 has purchased a ticket from seller L6 and left.
+H001 H009 H002 H008 H006 H007 H003 H004 H000 - 
+L404 L509 L609 L309 M308 L204 M205 L608 - - 
+L507 L202 M309 L601 L208 M304 L107 L102 M104 L303 
+L307 L500 L108 M109 L205 L203 L302 M303 M200 L209 
+L505 M203 L501 M306 L308 L502 L406 M300 L401 L604 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 M209 L607 M106 L206 L105 
+L600 L305 L300 L301 L400 L106 L200 L606 L503 L508 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:59 Customer 5 has purchased a ticket from seller H0 and left.
+H001 H009 H002 H008 H006 H007 H003 H004 H000 H005 
+L404 L509 L609 L309 M308 L204 M205 L608 - - 
+L507 L202 M309 L601 L208 M304 L107 L102 M104 L303 
+L307 L500 L108 M109 L205 L203 L302 M303 M200 L209 
+L505 M203 L501 M306 L308 L502 L406 M300 L401 L604 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 M209 L607 M106 L206 L105 
+L600 L305 L300 L301 L400 L106 L200 L606 L503 L508 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:60 Customer 1 has purchased a ticket from seller M3 and left.
+H001 H009 H002 H008 H006 H007 H003 H004 H000 H005 
+L404 L509 L609 L309 M308 L204 M205 L608 M301 - 
+L507 L202 M309 L601 L208 M304 L107 L102 M104 L303 
+L307 L500 L108 M109 L205 L203 L302 M303 M200 L209 
+L505 M203 L501 M306 L308 L502 L406 M300 L401 L604 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 M209 L607 M106 L206 L105 
+L600 L305 L300 L301 L400 L106 L200 L606 L503 L508 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+0:63 Customer 3 has purchased a ticket from seller M1 and left.
+H001 H009 H002 H008 H006 H007 H003 H004 H000 H005 
+L404 L509 L609 L309 M308 L204 M205 L608 M301 M103 
+L507 L202 M309 L601 L208 M304 L107 L102 M104 L303 
+L307 L500 L108 M109 L205 L203 L302 M303 M200 L209 
+L505 M203 L501 M306 L308 L502 L406 M300 L401 L604 
+M108 M101 M207 M105 M206 M204 M305 M307 M107 M208 
+M202 M102 M100 M302 M201 M209 L607 M106 L206 L105 
+L600 L305 L300 L301 L400 L106 L200 L606 L503 L508 
+L402 L104 L101 L605 L109 L103 L407 L201 L409 L405 
+L306 L603 L207 L304 L506 L408 L403 L100 L504 L602 
+
+There were 10 H customers seated.
+There were 30 M customers seated.
+There were 60 L customers seated.
+There were 0 customers turned away.

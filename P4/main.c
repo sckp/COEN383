@@ -133,6 +133,7 @@ int main(int argc, char* argv[]) {
                         
                         //PAGE IN MEMEMORY
                         if(in_memory( &page_list, jobs[j].pid, jobs[j].page_now)) {
+<<<<<<< HEAD
                             //GET PAGE FROM JOB
                             Page *temp = page_list.head;
                             Page *pnew = NULL;
@@ -160,6 +161,9 @@ int main(int argc, char* argv[]) {
                                 }
                             }
                             
+=======
+                            //TODO GET PAGE FROM JOB ID
+>>>>>>> 579269e7b57519380b5210c40120e1f6e6eb7218
                             //CHECK IF PAGE IN MEM AND IF IT IS CHECK ITS STATE
                         }
                         //PAGE NOT IN MEMORY

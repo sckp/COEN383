@@ -6,6 +6,9 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define JOB_NUMBER 100
+
+
 enum job_state{
     RUNNING,
     WAITING,
@@ -56,5 +59,8 @@ int in_memory(List* page_list, int pid, int page_num);
 int free_memory(List* page_list, int pid);
 Page* find_free(List* page_list);
 void print_jobs(Job* jobs);
+
+void job_sort(Job * jobs, int size);
+void change_position(Job *jobs, int i, int j);
 
 #endif

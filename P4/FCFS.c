@@ -9,7 +9,7 @@ void FCFS(List* page_list) {
         }
         temp = temp->next;
     }
- 
+    printf("EVICT PAGE | PID: %d, FREQUENCY: %d, LAST TIMESTAMP: %d\n\n", evict->pid, evict->frequency_num, evict->last_timestamp);
     evict->pid = -1;
     evict->page_num = -1;
     evict->state = NO_MEM;

@@ -4,7 +4,7 @@ int main(int argc, char* argv[]) {
 
     
     int clock = 0;
-    
+    int swapped_num = 0;
     //COUNTS TO DETERMINE HIT MISS RATIO
     float hitmiss_average = 0.0;
     int hits = 0;
@@ -151,7 +151,11 @@ int main(int argc, char* argv[]) {
                                 hits++;
                             } else if (pnew->state == LOADING) {
                                 jobs[j].io_num--;
+                                printf("JOB LOADING\n");
+                                printf("CLOCK: %d, PID: %d, ARRIVAL TIME: %d, NUMBER OF PAGES: %d, DURATION: %d\n\n", clock, jobs[j].pid, jobs[j].arrival_time, jobs[j].page_num, jobs[j].service_duration);
                                 if (jobs[j].io_num <= 0) {
+                                    printf("JOB RUNNING\n");
+                                    printf("CLOCK: %d, PID: %d, ARRIVAL TIME: %d, NUMBER OF PAGES: %d, DURATION: %d\n\n", clock, jobs[j].pid, jobs[j].arrival_time, jobs[j].page_num, jobs[j].service_duration);
                                     pnew->first_timestamp = clock+(0.1*i);
                                     pnew->state = IN_MEM;
                                     pnew->last_timestamp = clock+(0.1*i);
@@ -167,6 +171,7 @@ int main(int argc, char* argv[]) {
                         else {
                             Page* page = find_free(&page_list);
                             //EVICT A PAGE
+                            printf("EVICTING PAGE\n");
                             if(page == NULL) {
                                 //printf("Memory full:\n");
                                 if (flg == 0) {
@@ -182,7 +187,7 @@ int main(int argc, char* argv[]) {
                                     MFU(&page_list);
                                 }
                                 if (flg == 4) {
-
+                                    RAN(&page_list);
                                 }
                                 misses++;
                                 jobs[j].io_num = 2 + rand() % 3;
@@ -194,11 +199,15 @@ int main(int argc, char* argv[]) {
 //                                }
 //                                printf("\n");
                                 page = find_free(&page_list);
+                                
                             }
-                            
+                            printf("PAGE TO MEMORY\n");
+                            printf("Clock: %d, PID: %d, CURRENT PAGE: %d\n\n", clock, jobs[j].pid, jobs[j].page_now);
+                            swapped_num ++;
                             jobs[j].state = WAITING;
                             jobs[j].io_num = 2 + rand() % 3;
                             jobs[j].service_duration += jobs[j].io_num;
+                            
                             page->state = LOADING;
                             page->pid = jobs[j].pid;
                             page->page_num = jobs[j].page_now;
@@ -215,13 +224,15 @@ int main(int argc, char* argv[]) {
                     if(jobs[i].service_duration <= 0) {
                         free_memory(&page_list, jobs[i].pid);
                         jobs[i].state = DONE;
-                    }
+                        printf("JOB FINISHED\n");
+                        printf("CLOCK: %d, PID: %d, EXIT TIME: %d, NUMBER OF PAGES: %d, DURATION: %d\n\n", clock, jobs[i].pid, clock, jobs[i].page_num, jobs[i].service_duration);                    }
                 }
             }
         }
         printf("\nJobs Run: %d Hits: %d Misses: %d\n\n", i+1, hits, misses);
         hitmiss_average += hits/(1.0*misses);
     }
+    printf("Average number of processes that were swapped in %d\n\n", swapped_num/5);
     printf("Hit Miss Ratio: %f\n\n",(hitmiss_average /5));
 }
 

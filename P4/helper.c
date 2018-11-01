@@ -58,8 +58,8 @@ int free_memory(List* page_list, int pid) {
 void print_jobs(Job* jobs){
     for (int i=0; i < JOB_NUMBER; i++){
         if (jobs[i].state != READY){
-            printf("PID: %d, # of Pages: %d, IO: %d, Arrival Time: %d, Service Duration: %d, Current Page: %d, Current State: %s\n",
-         jobs[i].pid, jobs[i].page_num, jobs[i].io_num, jobs[i].arrival_time, jobs[i].service_duration, jobs[i].page_now, jobs[i].state );
+            printf("PID: %d, # of Pages: %d, IO: %d, Arrival Time: %d, Service Duration: %d, Current Page: %d\n",
+         jobs[i].pid, jobs[i].page_num, jobs[i].io_num, jobs[i].arrival_time, jobs[i].service_duration, jobs[i].page_now );
          }
     }
 }

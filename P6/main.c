@@ -1,14 +1,11 @@
 #include <stdio.h>
 #include <string.h>
-
 #include <time.h>
 #include <stdlib.h>
-
 #include <sys/select.h>
 #include <sys/time.h>
 #include <sys/types.h>
 #include <unistd.h>
-
 #include <fcntl.h>
 #include <stdbool.h>
 
@@ -20,8 +17,6 @@
 #define KIDS			4
 
 int main(int argc, char* argv[]) {
-	// create the struct to use gettimeofday function
-	struct timeval tv;
 	// variable for child process
 	pid_t cpid[KIDS];
 	// file descriptors for the pipe for the child
@@ -48,49 +43,15 @@ int main(int argc, char* argv[]) {
 		else if(0 == cpid[i]) {
 			// close unused child file descriptors
 			close(fd[i][READ_END]);
-			close(STDOUT_FILENO);
-			close(STDIN_FILENO);
-			
-			// initialize the seed for randomization
-			srand(time(NULL));
-				
-			// get the starting time
-			gettimeofday(&tv, NULL);
-			// set the end time of the while loop
-			int endtime = tv.tv_sec + 7;
-			// set the baseline time that needs to be subtracted
-			int baseTime = tv.tv_sec;
-			// create a variable to count the number of messages
-			int msg_num = 1;
-			
-			// create a write message buffer
-			char* write_msg = malloc(sizeof(char) * BUFF_SIZE);
-			while(endtime > (int)tv.tv_sec) {
-				// sleep for the random amount of time
-				sleep(rand() % 3);
-				
-				// get the time of day for the message
-				gettimeofday(&tv, NULL);
-				
-				// find out the time between messages sent
-				int msg_time = (int)(tv.tv_sec - baseTime);
-				double msec = (double)(tv.tv_usec/1000.00);
-		
-				// format the message that the child will send to the parent
-				snprintf(write_msg, BUFF_SIZE, "%i:%05.3f: Child %i message %i\n", msg_time, msec, i, msg_num);
-				// write the message to the pipe
-				write(fd[i][WRITE_END], write_msg, strlen(write_msg));
-				
-				// get the time of day for next iteration
-				gettimeofday(&tv, NULL);
-				msg_num++;
+			// check if it is one of the non terminal children
+			if(4 > i) {
+				no_terminal_child(fd[i][WRITE_END], i, BUFF_SIZE);
 			}
-			// write to the parent that the pipe is closing
-			char end_msg[] = "END";
-			write(fd[i][WRITE_END], end_msg, sizeof(end_msg));
+			// otherwise it is the terminal child
+			else {
+				
+			}
 			
-			// close the write end of the pipe before terminating the child
-			close(fd[i][WRITE_END]);
 			// have the child process exit
 			_exit(EXIT_SUCCESS);
 		}
@@ -101,25 +62,31 @@ int main(int argc, char* argv[]) {
 		}
 	}
 	
+	// set the mode for the file to be opened/created
+	mode_t mode = S_IRWXU | S_IRWXG | S_IRWXO;
+	int outFD = open("output.txt", O_CREAT | O_WRONLY | O_TRUNC, mode);
+	if(0 > outFD) {
+		fprintf(stderr, "open() failed");
+		exit(EXIT_FAILURE);
+	}
+	
 	// read from all of the pipes and write to a file
 	fd_set fdsets;
 	struct timeval timeout;
 	
 	// create bool variable to signify a pipe being open
 	bool p1 = true, p2 = true, p3 = true, p4 = true;
-	
 	// loop as long as a pipe is open
 	while(p1 || p2 || p3 || p4) {
-		// ensure that fds is zerod
+		// set the timeout value
+		timeout.tv_sec = 2;
+		timeout.tv_usec = 500000;
+		// ensure that fds is zeroed
 		FD_ZERO(&fdsets);
 		// set all of the file descriptors
 		for(int i = 0; i < KIDS; i++) {
 			FD_SET(fd[i][READ_END], &fdsets);
 		}
-		
-		// set the timeout value
-		timeout.tv_sec = 2;
-		timeout.tv_usec = 500000;
 		
 		int retval = select(12, &fdsets, NULL, NULL, &timeout);
 		if(-1 == retval) {
@@ -139,7 +106,7 @@ int main(int argc, char* argv[]) {
 				}
 				// otherwise write the data to the file
 				else {
-					write(STDOUT_FILENO, read_msg, val);
+					write_to_file(outFD, read_msg, val);
 				}
 			}
 			// second child's pipe
@@ -152,7 +119,7 @@ int main(int argc, char* argv[]) {
 				}
 				// otherwise write the data to the file
 				else {
-					write(STDOUT_FILENO, read_msg, val);
+					write_to_file(outFD, read_msg, val);
 				}
 			}
 			// third child's pipe
@@ -165,7 +132,7 @@ int main(int argc, char* argv[]) {
 				}
 				// otherwise write the data to the file
 				else {
-					write(STDOUT_FILENO, read_msg, val);
+					write_to_file(outFD, read_msg, val);
 				}
 			}
 			// fourth child's pipe
@@ -178,20 +145,22 @@ int main(int argc, char* argv[]) {
 				}
 				// otherwise write the data to the file
 				else {
-					write(STDOUT_FILENO, read_msg, val);
+					write_to_file(outFD, read_msg, val);
 				}
 			}
 			// free the buffer memory
 			free(read_msg);
-		}
-		else {
-			printf("Select timed out\n");
 		}
 	}
 	// close all of the pipes to the children
 	for(int i = 0; i < KIDS; i++) {
 		close(fd[i][READ_END]);
 	}
+	
+	
+	// close the output file descriptor
+	close(outFD);
+	
 	printf("Program done\n");
 	
 	return 0;

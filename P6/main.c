@@ -14,7 +14,7 @@
 #define BUFF_SIZE		64
 #define READ_END		0
 #define WRITE_END		1
-#define KIDS			4
+#define KIDS			5
 
 int main(int argc, char* argv[]) {
 	// variable for child process
@@ -49,7 +49,7 @@ int main(int argc, char* argv[]) {
 			}
 			// otherwise it is the terminal child
 			else {
-				
+				terminal_child(fd[i][WRITE_END], i, BUFF_SIZE);
 			}
 			
 			// have the child process exit
@@ -75,9 +75,9 @@ int main(int argc, char* argv[]) {
 	struct timeval timeout;
 	
 	// create bool variable to signify a pipe being open
-	bool p1 = true, p2 = true, p3 = true, p4 = true;
+	bool p1 = true, p2 = true, p3 = true, p4 = true, p5 = true;
 	// loop as long as a pipe is open
-	while(p1 || p2 || p3 || p4) {
+	while(p1 || p2 || p3 || p4 || p5) {
 		// set the timeout value
 		timeout.tv_sec = 2;
 		timeout.tv_usec = 500000;
@@ -142,6 +142,19 @@ int main(int argc, char* argv[]) {
 				if(0 == strcmp("END", read_msg)) {
 					// set the pipe open flag to false and close the pipe
 					p4 = false;
+				}
+				// otherwise write the data to the file
+				else {
+					write_to_file(outFD, read_msg, val);
+				}
+			}
+			// fifth child's pipe
+			if(FD_ISSET(fd[4][READ_END], &fdsets)) {
+				int val = read_by_line(fd[4][READ_END], read_msg, BUFF_SIZE);
+				// check to see if the pipe has been closed by the child
+				if(0 == strcmp("END", read_msg)) {
+					// set the pipe open flag to false and close the pipe
+					p5 = false;
 				}
 				// otherwise write the data to the file
 				else {

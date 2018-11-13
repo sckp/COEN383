@@ -9,8 +9,11 @@
 
 #include <sys/select.h>
 #include <sys/time.h>
-//#include <sys/types.h>
+#include <sys/types.h>
 #include <unistd.h>
+#include <stdbool.h>
+
+#define timelimit		30
 
 // function to clear out the buffer contents
 void clear_buffer(char* msg, int size);
@@ -27,6 +30,6 @@ void write_to_file(int fd, char* msg, int size);
 void no_terminal_child(int fd, int child, int buff_size);
 
 // function to handle child that interacts with terminal
-void terminal_child(int fd);
+void terminal_child(int fd, int child, int buff_size);
 
 #endif

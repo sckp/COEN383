@@ -44,8 +44,6 @@ void write_to_file(int fd, char* msg, int size) {
 	}
 }
 
-
-
 // this function handles the actions required by the children
 // that do not interact with the terminal
 void no_terminal_child(int fd, int child, int buff_size) {
@@ -60,7 +58,7 @@ void no_terminal_child(int fd, int child, int buff_size) {
 	// get the starting time
 	gettimeofday(&tv, NULL);
 	// set the end time of the while loop
-	int endtime = tv.tv_sec + 7;
+	int endtime = tv.tv_sec + timelimit;
 	// set the baseline time that needs to be subtracted
 	int baseTime = tv.tv_sec;
 	// create a variable to count the number of messages
@@ -98,11 +96,89 @@ void no_terminal_child(int fd, int child, int buff_size) {
 }
 
 // this function handles interaction with the terminal
-void terminal_child(int fd) {
+void terminal_child(int fd, int child, int buff_size) {
+	// create the struct to use gettimeofday function
+	struct timeval tv;
+	
+	// initialize the seed for randomization
+	srand(time(NULL));
+	// get the starting time
+	gettimeofday(&tv, NULL);
+	// set the end time of the while loop
+	int endtime = tv.tv_sec + timelimit;
+	// set the baseline time that needs to be subtracted
+	int baseTime = tv.tv_sec;
+	// create a variable to count the number of messages
+	int msg_num = 1;
+	
+	// create a write message buffer
+	char* write_msg = malloc(sizeof(char) * (2 * buff_size));
+	// create flag to determine if the prompt is needed
+	bool prompt = true;
+	
+	// read from all of the pipes and write to a file
+	fd_set fdsets;
+	struct timeval timeout;
+	// set the timeout value
+	timeout.tv_sec = timelimit;
+	
+	// loop for 30 seconds
+	while(endtime > (int)tv.tv_sec) {
+		// ensure that fds is zeroed
+		FD_ZERO(&fdsets);
+		FD_SET(STDIN_FILENO, &fdsets);
+		if(prompt) {
+			// set need for the prompt to false
+			prompt = false;
+			// display prompt to user
+			char prom[] = "Enter user input (64 character limit): ";
+			write(STDOUT_FILENO, prom, strlen(prom));
+		}
+		// use select to monitor for input
+		int retval = select(12, &fdsets, NULL, NULL, &timeout);
+		if(-1 == retval) {
+			perror("select()");
+		}
+		else if(retval) {
+			// make sure that the input is from STDIN_FILENO
+			if(FD_ISSET(STDIN_FILENO, &fdsets)) {
+				// reset the prompt flag to generate the prompt again
+				prompt = true;
+				// create a user input buffer
+				char* user_input = malloc(sizeof(char) * buff_size);
+				clear_buffer(user_input, buff_size);
+				// limit the width read in to 64 characters
+				read(STDOUT_FILENO, user_input, buff_size);
+				
+				// get the time of day for the message
+				gettimeofday(&tv, NULL);
+				// find out the time between messages sent
+				int msg_time = (int)(tv.tv_sec - baseTime);
+				double msec = (double)(tv.tv_usec/1000.00);
+				
+				// format the message that the child will send to the parent
+				snprintf(write_msg, (2 * buff_size), "%i:%05.3f: Child %i: %s", msg_time, msec, child, user_input);
+				// write the message to the pipe
+				write(fd, write_msg, strlen(write_msg));
+				
+				// get the time of day for next iteration
+				gettimeofday(&tv, NULL);
+				msg_num++;
+				
+				// free the buffer memory
+				free(user_input);
+			}
+		}
+		else {
+			printf("\n30 second time limit has been reached.\n");
+		}
+		// get the time to see if child's time has elapsed
+		gettimeofday(&tv, NULL);
+	}
+	
 	// write to the parent that the pipe is closing
 	char end_msg[] = "END";
 	write(fd, end_msg, sizeof(end_msg));
-	
-	// close the write end of the pipe before terminating the child
-	close(fd);
+	// free the memory used for a buffer
+	free(write_msg);
 }

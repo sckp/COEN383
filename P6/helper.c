@@ -46,27 +46,26 @@ void write_to_file(int fd, char* msg, int size) {
 
 // this function handles the actions required by the children
 // that do not interact with the terminal
-void no_terminal_child(int fd, int child, int buff_size) {
+void no_terminal_child(int fd, int child, int buff_size, int baseTime) {
 	// close terminal file descriptors
 	close(STDOUT_FILENO);
 	close(STDIN_FILENO);
-	// create the struct to use gettimeofday function
-	struct timeval tv;
 	
 	// initialize the seed for randomization
 	srand(time(NULL));
-	// get the starting time
-	gettimeofday(&tv, NULL);
 	// set the end time of the while loop
-	int endtime = tv.tv_sec + timelimit;
-	// set the baseline time that needs to be subtracted
-	int baseTime = tv.tv_sec;
+	int endtime = baseTime + 30;
 	// create a variable to count the number of messages
 	int msg_num = 1;
-	
 	// create a write message buffer
 	char* write_msg = malloc(sizeof(char) * buff_size);
-	// check if it is the first four children
+
+	// create the struct to use gettimeofday function
+	struct timeval tv;
+	// get the starting time
+	gettimeofday(&tv, NULL);
+
+	// loop until the timelimit is reached
 	while(endtime > (int)tv.tv_sec) {
 		// sleep for the random amount of time
 		sleep(rand() % 3);
@@ -96,18 +95,12 @@ void no_terminal_child(int fd, int child, int buff_size) {
 }
 
 // this function handles interaction with the terminal
-void terminal_child(int fd, int child, int buff_size) {
+void terminal_child(int fd, int child, int buff_size, int baseTime) {
 	// create the struct to use gettimeofday function
 	struct timeval tv;
 	
 	// initialize the seed for randomization
 	srand(time(NULL));
-	// get the starting time
-	gettimeofday(&tv, NULL);
-	// set the end time of the while loop
-	int endtime = tv.tv_sec + timelimit;
-	// set the baseline time that needs to be subtracted
-	int baseTime = tv.tv_sec;
 	// create a variable to count the number of messages
 	int msg_num = 1;
 	
@@ -120,10 +113,12 @@ void terminal_child(int fd, int child, int buff_size) {
 	fd_set fdsets;
 	struct timeval timeout;
 	// set the timeout value
-	timeout.tv_sec = timelimit;
+	timeout.tv_sec = 30;
+	timeout.tv_usec = 0;
+	bool time_limit = false;
 	
 	// loop for 30 seconds
-	while(endtime > (int)tv.tv_sec) {
+	while(!time_limit) {
 		// ensure that fds is zeroed
 		FD_ZERO(&fdsets);
 		FD_SET(STDIN_FILENO, &fdsets);
@@ -170,7 +165,8 @@ void terminal_child(int fd, int child, int buff_size) {
 			}
 		}
 		else {
-			printf("\n30 second time limit has been reached.\n");
+			printf("\n30 second limit reached\n");
+			time_limit = true;
 		}
 		// get the time to see if child's time has elapsed
 		gettimeofday(&tv, NULL);
@@ -181,4 +177,23 @@ void terminal_child(int fd, int child, int buff_size) {
 	write(fd, end_msg, sizeof(end_msg));
 	// free the memory used for a buffer
 	free(write_msg);
+	close(fd);
+}
+
+// function to write the parent timestamp to the output message
+void parent_timestamp(int fd, int baseTime) {
+	// create the struct to use gettimeofday function
+	struct timeval tv;
+	// get the time of day for the message
+	gettimeofday(&tv, NULL);
+	// find out the time between messages sent
+	int msg_time = (int)(tv.tv_sec - baseTime);
+	double msec = (double)(tv.tv_usec/1000.00);
+	
+	// create a write message buffer
+	char* write_msg = malloc(sizeof(char) * 32);
+	// format the message that the child will send to the parent
+	snprintf(write_msg, 32, "%i:%05.3f: Parent: ", msg_time, msec);
+	// write the message to the output file
+	write_to_file(fd, write_msg, strlen(write_msg));
 }

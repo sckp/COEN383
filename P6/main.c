@@ -30,6 +30,12 @@ int main(int argc, char* argv[]) {
 		}
 	}
 	
+	// get the starting time
+	struct timeval tv;
+	gettimeofday(&tv, NULL);
+	// set the baseline time that needs to be subtracted
+	int baseTime = tv.tv_sec;
+	
 	// loop to create all of the desired children
 	for(int i = 0; i < KIDS; i++) {
 		// fork a child process
@@ -45,11 +51,11 @@ int main(int argc, char* argv[]) {
 			close(fd[i][READ_END]);
 			// check if it is one of the non terminal children
 			if(4 > i) {
-				no_terminal_child(fd[i][WRITE_END], i, BUFF_SIZE);
+				no_terminal_child(fd[i][WRITE_END], i, BUFF_SIZE, baseTime);
 			}
 			// otherwise it is the terminal child
 			else {
-				terminal_child(fd[i][WRITE_END], i, BUFF_SIZE);
+				terminal_child(fd[i][WRITE_END], i, BUFF_SIZE, baseTime);
 			}
 			
 			// have the child process exit
@@ -106,7 +112,10 @@ int main(int argc, char* argv[]) {
 				}
 				// otherwise write the data to the file
 				else {
-					write_to_file(outFD, read_msg, val);
+					if('\0' != read_msg[0]) {
+						parent_timestamp(outFD, baseTime);
+						write_to_file(outFD, read_msg, val);
+					}
 				}
 			}
 			// second child's pipe
@@ -119,7 +128,10 @@ int main(int argc, char* argv[]) {
 				}
 				// otherwise write the data to the file
 				else {
-					write_to_file(outFD, read_msg, val);
+					if('\0' != read_msg[0]) {
+						parent_timestamp(outFD, baseTime);
+						write_to_file(outFD, read_msg, val);
+					}
 				}
 			}
 			// third child's pipe
@@ -132,7 +144,10 @@ int main(int argc, char* argv[]) {
 				}
 				// otherwise write the data to the file
 				else {
-					write_to_file(outFD, read_msg, val);
+					if('\0' != read_msg[0]) {
+						parent_timestamp(outFD, baseTime);
+						write_to_file(outFD, read_msg, val);
+					}
 				}
 			}
 			// fourth child's pipe
@@ -145,7 +160,10 @@ int main(int argc, char* argv[]) {
 				}
 				// otherwise write the data to the file
 				else {
-					write_to_file(outFD, read_msg, val);
+					if('\0' != read_msg[0]) {
+						parent_timestamp(outFD, baseTime);
+						write_to_file(outFD, read_msg, val);
+					}
 				}
 			}
 			// fifth child's pipe
@@ -158,7 +176,10 @@ int main(int argc, char* argv[]) {
 				}
 				// otherwise write the data to the file
 				else {
-					write_to_file(outFD, read_msg, val);
+					if('\0' != read_msg[0]) {
+						parent_timestamp(outFD, baseTime);
+						write_to_file(outFD, read_msg, val);
+					}
 				}
 			}
 			// free the buffer memory
@@ -170,11 +191,8 @@ int main(int argc, char* argv[]) {
 		close(fd[i][READ_END]);
 	}
 	
-	
 	// close the output file descriptor
 	close(outFD);
-	
-	printf("Program done\n");
 	
 	return 0;
 }
